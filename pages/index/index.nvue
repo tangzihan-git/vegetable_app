@@ -16,6 +16,8 @@
 				<image :src="item.img" mode="widthFix" style="width:70px;height:70px"></image>
 				<text class="font-md mt-2 mb-2">{{item.text}}</text>
 			</div>
+			
+			
 		</div>
 		<!-- 广告位 -->
 		
@@ -35,6 +37,7 @@
 		 <scroller class="w-100 flex-row" style="height: 400px;" :show-scrollbar="false" scroll-direction="horizontal">
 			<div class=" p-2" style="width: 250px;" v-for="item,index in goodsReco" :key="item.id">
 				<div @click="detail(item)" class="d-flex flex-column a-center j-center text-center ">
+					
 					
 					<image :src="item.primary_pic_url" style="width: 215px;height: 180px;" mode=""></image>
 					
@@ -345,13 +348,9 @@
 					isHot:1,
 					categoryId:0
 				}).then(data=>{
-				    // if(!this.goodsReco.length){
+				    if(!this.goodsReco.length){
 						this.goodsReco  = data.data.data
-					// }
-					
-					// console.log(data)
-				
-					
+					}
 				})
 				
 				
