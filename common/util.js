@@ -1,5 +1,8 @@
+// 帮助函数
+
 import $ from "./request.js"
 export default{
+	//检测网络状态
 	onNetWork(){
 		let func = (res)=>{
 			if(res.networkType==='none'){
@@ -75,6 +78,7 @@ export default{
 		});  
 		// #endif
 	},
+	//弹框
 	showToast(msg){
 		uni.showToast({
 			title:msg,

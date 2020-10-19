@@ -36,7 +36,7 @@
 		}
 	}
 </script>
-<style src="@/common/zcm-main-nvue.css"></style>
+<style src="@/common/tzh-layout-nvue.css"></style>
 <style src="@/common/common.css"></style>
 <style>
 

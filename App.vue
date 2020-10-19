@@ -16,7 +16,7 @@
 	/*每个页面公共css */
 	@import './common/uni.css';
 	/* 布局库 */
-	@import './common/zcm-main.css';
+	@import './common/tzh-layout.css';
 	/* 图标库 */
 	@import './common/icon.css';
 	/* 引入动画库 */

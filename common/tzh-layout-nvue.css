@@ -1,4 +1,29 @@
+/**
+ * 项目布局文件不断维护（nvue版）
+ * 作者：唐子涵
+ * 邮箱：2197486242@qq.com
+ */
+
+/*nvue不支持变量*/
+
+/* body{
+	--primary:#007bff;
+	--secondary: #6c757d;
+	--success: #28a745;
+	--danger: #dc3545;
+	--warning: #ffc107;
+	--info: #17a2b8;
+	--light: #f8f9fa;
+	--dark: #343a40;
+	--muted: #6c757d;
+	--white: #fff;
+	--borderColor:#dee2e6;
+	--lightmuted:#B2B2B2;
+}
+
+/ *
 /* 宽高 */
+
 .w-100{ width: 750px;}
 .w-50{ width: 375px;}
 .h-100{ height: 1250px;}
@@ -9,12 +34,9 @@
 .font-md{ font-size: 30px; }
 .font-lg{ font-size: 40px; }
 .font-big{ font-size: 60px; }
-
-/* 字体 */
-
 .font-weight{ font-weight: bold!important; }
 .font-weight-100{ font-weight: 100!important; }
-
+/* 行高 */
 .line-h0{ line-height: 0!important; }
 .line-h{ line-height: 1!important; }
 .line-h-sm{ line-height: 1.2!important; }
@@ -22,10 +44,10 @@
 .line-h-lg{ line-height: 2!important; }
 .line-h-big{ line-height: 3!important; }
 
-.font-weight{ font-weight: bold; }
-/*  -- 栅格布局 -- */
+
+/* 布局 */
+/* nvue不支持 border-box */
 .row { /* box-sizing: border-box; */ flex-direction: row; flex-wrap: wrap;}
-/* [class*='col-'] { min-height: 1px; width: 62.5px; padding:5px; } */
 .col-1{ width: 62.5px; } 
 .col-2{ width: 125px; } 
 .col-3{ width: 187.5px; } 
@@ -56,6 +78,15 @@
 .a-stretch{ align-items: stretch; }
 .a-self-end{ align-self: flex-end; }
 .a-self-stretch{ align-self:stretch; }
+
+/* 定位 */
+.position-absolute{ position: absolute; }
+.position-fixed{ position: fixed; }
+.position-relative{ position: relative; }
+.left-0{ left: 0; }
+.top-0{ top: 0; }
+.bottom-0{ bottom: 0; }
+.right-0{ right: 0; }
 
 
 /* Border */
@@ -113,7 +144,7 @@
 .bg-white{ background-color: #ffffff; }
 
 .bg-light-secondary{background-color: #F1F1F1!important;}
-/* Spacing */
+/* 外补丁 */
 .m-0 { margin-left: 0;margin-right: 0;margin-top: 0;margin-bottom: 0;}
 .m { margin-left: 5px;margin-right: 5px;margin-top: 5px;margin-bottom: 5px;}
 .m-1 { margin-left: 10px;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;}
@@ -171,6 +202,8 @@
 .mr-4 { margin-right: 40px;}
 .mr-5 { margin-right: 50px;}
 .mr-auto{margin-right: auto;}
+
+/* 内补丁 */
 .p-0 {padding-left: 0;padding-right: 0;padding-top: 0;padding-bottom: 0;}
 .p {padding-left: 5px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px;}
 .p-1 {padding-left: 10px;padding-right: 10px;padding-top: 10px;padding-bottom: 10px;}
@@ -227,11 +260,3 @@
 .pr-4 { padding-right: 40px;}
 .pr-5 { padding-right: 50px;}
 
-/* 定位 */
-.position-absolute{ position: absolute; }
-.position-fixed{ position: fixed; }
-.position-relative{ position: relative; }
-.left-0{ left: 0; }
-.top-0{ top: 0; }
-.bottom-0{ bottom: 0; }
-.right-0{ right: 0; }

@@ -1,3 +1,4 @@
+/* 公共 */
 .thline{
 	padding: 0 10upx 0;
 	margin: 20upx 0;
@@ -7,7 +8,7 @@
 	text-align: center;
 }
 .main-text-color{
-	color: #45c36f !important; /* //#f9514e */
+	color: #45c36f !important; 
 }
 .main-bg-color{
 	background-color: #45c36f !important;

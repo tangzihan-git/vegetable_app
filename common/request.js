@@ -1,3 +1,5 @@
+// 封装ajax
+
 import $C from '@/common/config.js';
 export default{
 	common:{

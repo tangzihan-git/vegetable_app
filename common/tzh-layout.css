@@ -1,9 +1,16 @@
+/**
+ * 项目布局文件不断维护
+ * 作者：唐子涵
+ * 邮箱：2197486242@qq.com
+ */
+
 /* 防止图片闪一下 */
 image{will-change: transform}
 /* scroll-view */
 .scroll-row{ width: 100%;white-space: nowrap; }
 .scroll-row-item{ display: inline-block; }
 
+/* 颜色变量 */
 body{
 	--primary:#007bff;
 	--secondary: #6c757d;
@@ -50,7 +57,7 @@ body{
 .font-big{ font-size: 60upx; }
 .font-weight{ font-weight: bold!important; }
 .font-weight-100{ font-weight: 100!important; }
-
+/* 行高 */
 .line-h0{ line-height: 0!important; }
 .line-h{ line-height: 1!important; }
 .line-h-sm{ line-height: 1.2!important; }
@@ -59,14 +66,14 @@ body{
 .line-h-big{ line-height: 3!important; }
 
 .line-through{ text-decoration: line-through; }
-
 .text-center{ text-align: center; }
 .text-left{ text-align: left; }
 .text-right{ text-align: right; }
 
+/* 布局 */
 .row { box-sizing: border-box!important; display: flex!important; flex-direction: row; flex-wrap: wrap;}
 [class*='col-'],[class*='span-'],[class*='span24-'] { min-height: 1px;box-sizing: border-box!important;}
-/* 栅栏一 */
+/* 栅栏一（12份） */
 .col-1{ width: 62.5upx; } 
 .col-2{ width: 125upx; } 
 .col-3{ width: 187.5upx; } 
@@ -127,7 +134,7 @@ body{
 .span24-24{ width: 100%; }
 
 
-/* flex布局 */
+/* flex */
 .d-flex{ display: flex; }
 .d-block{ display: block; }
 .d-inline-block{ display: inline-block; }
@@ -204,7 +211,7 @@ body{
 .bg-white{ background-color: var(--white)!important; }
 .bg-light-secondary{background-color: #F1F1F1!important;}
 
-/* Spacing */
+/* 外补丁 */
 .m-0 { margin-left: 0;margin-right: 0;margin-top: 0;margin-bottom: 0;}
 .m { margin-left: 5upx;margin-right: 5upx;margin-top: 5upx;margin-bottom: 5upx;}
 .m-1 { margin-left: 10upx;margin-right: 10upx;margin-top: 10upx;margin-bottom: 10upx;}
@@ -264,6 +271,7 @@ body{
 .mr-4 { margin-right: 40upx;}
 .mr-5 { margin-right: 50upx;}
 
+/* 内补丁 */
 .p-0 {padding-left: 0;padding-right: 0;padding-top: 0;padding-bottom: 0;}
 .p {padding-left: 5upx;padding-right: 5upx;padding-top: 5upx;padding-bottom:5upx;}
 .p-1 {padding-left: 10upx;padding-right: 10upx;padding-top: 10upx;padding-bottom: 10upx;}
