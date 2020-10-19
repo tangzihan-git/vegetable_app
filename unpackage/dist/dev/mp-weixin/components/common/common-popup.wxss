@@ -1,0 +1,89 @@
+
+._popup.data-v-5850f3fa,._mask.data-v-5850f3fa{
+	position: fixed;
+	top:0;
+	width: 100%;
+	height: 100%;
+}
+._popup.data-v-5850f3fa{
+	z-index: 2000;
+	/* display: none; */
+}
+._mask.data-v-5850f3fa{
+	z-index: 2002;
+	background-color: rgba(0,0,0,.5);
+}
+._popup ._body.data-v-5850f3fa{
+	position: fixed;
+	bottom: -1035rpx;
+	width: 92%;
+	padding: 0 4%;
+	height: 1035rpx;
+	background-color: #ffffff;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	z-index: 2003;
+}
+.show ._mask.data-v-5850f3fa{
+	-webkit-animation: showPopupMask-data-v-5850f3fa 0.2s linear both;
+	        animation: showPopupMask-data-v-5850f3fa 0.2s linear both;
+}
+.show ._body.data-v-5850f3fa{
+	-webkit-animation:  showPopupBody-data-v-5850f3fa 0.2s linear both;
+	        animation:  showPopupBody-data-v-5850f3fa 0.2s linear both;
+}
+.hide ._mask.data-v-5850f3fa{
+	-webkit-animation:  hidePopupMask-data-v-5850f3fa 0.2s linear both;
+	        animation:  hidePopupMask-data-v-5850f3fa 0.2s linear both;
+}
+.hide ._body.data-v-5850f3fa{
+	-webkit-animation:  hidePopupBody-data-v-5850f3fa 0.2s linear both;
+	        animation:  hidePopupBody-data-v-5850f3fa 0.2s linear both;
+}
+._popup.show.data-v-5850f3fa{
+	display: block;
+}
+._popup.hide.data-v-5850f3fa{
+	display: block;
+}
+._popup.none.data-v-5850f3fa{
+	display: none;
+}
+@-webkit-keyframes showPopupMask-data-v-5850f3fa{
+0%{opacity: 0;}
+100%{opacity: 1;}
+}
+@keyframes showPopupMask-data-v-5850f3fa{
+0%{opacity: 0;}
+100%{opacity: 1;}
+}
+@-webkit-keyframes hidePopupMask-data-v-5850f3fa{
+0%{opacity: 1;}
+100%{opacity: 0;}
+}
+@keyframes hidePopupMask-data-v-5850f3fa{
+0%{opacity: 1;}
+100%{opacity: 0;}
+}
+@-webkit-keyframes showPopupBody-data-v-5850f3fa{
+0%{-webkit-transform: translateY(0);transform: translateY(0);}
+100%{-webkit-transform: translateY(-100%);transform: translateY(-100%);}
+}
+@keyframes showPopupBody-data-v-5850f3fa{
+0%{-webkit-transform: translateY(0);transform: translateY(0);}
+100%{-webkit-transform: translateY(-100%);transform: translateY(-100%);}
+}
+@-webkit-keyframes hidePopupBody-data-v-5850f3fa{
+0%{-webkit-transform: translateY(-100%);transform: translateY(-100%);}
+100%{-webkit-transform: translateY(0);transform: translateY(0);}
+}
+@keyframes hidePopupBody-data-v-5850f3fa{
+0%{-webkit-transform: translateY(-100%);transform: translateY(-100%);}
+100%{-webkit-transform: translateY(0);transform: translateY(0);}
+}
+

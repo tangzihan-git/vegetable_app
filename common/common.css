@@ -1,0 +1,32 @@
+.thline{
+	padding: 0 10upx 0;
+	margin: 20upx 0;
+	line-height: 1upx;
+	border-left: 250upx solid #ddd;
+	border-right: 250upx solid #ddd;
+	text-align: center;
+}
+.main-text-color{
+	color: #45c36f !important; /* //#f9514e */
+}
+.main-bg-color{
+	background-color: #45c36f !important;
+}
+.main-bg-color-disabled{
+	background-color: #7adb9a !important;
+}
+.main-bg-hover-color{
+	background-color: #7adb9a!important ;
+}
+.price-color{
+	color:#FF5D60!important
+}
+.icon {
+   width: 1em; height: 1em;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+}
+.over-flow-eli{
+	display: block; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;
+}

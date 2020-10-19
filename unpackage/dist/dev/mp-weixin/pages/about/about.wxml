@@ -1,0 +1,1 @@
+<view><view class="d-flex flex-column j-center a-center py-4 my-4"><image style="width:100rpx;height:100rpx;" src="../../static/bg.jpg" mode="widthFix"></image><view class="text-light-muted font-md">蔬菜批发 1.0.0</view></view><view class="bg-white"><uni-list-item vue-id="1cea7424-1" title="版本更新" showArrow="{{true}}" bind:__l="__l"></uni-list-item></view></view>

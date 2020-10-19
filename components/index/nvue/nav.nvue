@@ -1,0 +1,24 @@
+<template>
+	<div>
+		<div class="flex-row flex-wrap w-100 px-2">
+				 <div class="a-center j-center mt-3 mb-3" 
+				 v-for="item,index in indexNavs" :key="index" 
+				 style="width: 142px;">
+					 <image :src="item.src" style="width: 58px;height: 58px;" mode=""></image>
+					
+				 </div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			indexNavs:Array
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style>
+
+</style>

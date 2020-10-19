@@ -1,0 +1,15 @@
+<template>
+	<view class="position-fixed top-0 left-0 right-0 font-md main-text-color d-flex a-center j-center bottom-0 bg-white text-light-muted" style="z-index: 10000;">
+		加载中...
+	</view>
+</template>
+
+<script>
+	export default {
+		
+	}
+</script>
+
+<style>
+
+</style>

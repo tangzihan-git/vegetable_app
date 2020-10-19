@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cart/cart",
+    "pages/my/my",
+    "pages/user-set/user-set",
+    "pages/user-info/user-info",
+    "pages/user-path-list/user-path-list",
+    "pages/user-path-edit/user-path-edit",
+    "pages/test/test",
+    "pages/class/class",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/search/search",
+    "pages/search-list/search-list",
+    "pages/order/order",
+    "pages/order-comfirm/order-comfirm",
+    "pages/pay-methods/pay-methods",
+    "pages/pay-result/pay-result",
+    "pages/order-detail/order-detail",
+    "pages/about/about",
+    "pages/logis-detail/logis-detail",
+    "pages/detail/detail"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "蔬菜批发",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#b5b5b5",
+    "selectedColor": "#45c36f",
+    "borderStyle": "white",
+    "backgroundColor": "#F6F7F9",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/tabbars/index.png",
+        "selectedIconPath": "static/tabbars/indexed.png"
+      },
+      {
+        "pagePath": "pages/class/class",
+        "text": "分类",
+        "iconPath": "/static/tabbars/class.png",
+        "selectedIconPath": "static/tabbars/classed.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "/static/tabbars/car.png",
+        "selectedIconPath": "/static/tabbars/cared.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "/static/tabbars/me.png",
+        "selectedIconPath": "/static/tabbars/meed.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "no-thing": "/components/common/no-thing",
+    "loading": "/components/common/loading",
+    "loading-plus": "/common/mixin/loading-plus"
+  }
+}

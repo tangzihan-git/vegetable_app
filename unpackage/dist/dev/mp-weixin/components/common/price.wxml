@@ -1,0 +1,1 @@
+<view class="{{['d-flex line-h font-weight mb-1',color]}}" style="{{(priceStyle)}}"><view class="{{['font a-self-start line-h font-weight-100 mt-1',iconSize]}}" style="{{(iconStyle)}}">￥</view><slot></slot></view>

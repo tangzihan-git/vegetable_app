@@ -1,0 +1,261 @@
+<template>
+	<div>
+		<list :show-scrollbar="false" >
+		<cell>
+		<div class="slider-box main-bg-color px-3 py-1"></div>
+		<!-- 轮播 -->
+		<myswiper :swipers="swipers"></myswiper>
+		
+		<!-- 占位 -->
+		<div class="mb-5 mt-5" style="height: 1px;"></div>
+		
+		<!-- 九宫格 -->
+		<div class="row gad mt-5 px-2" >
+			<div class="gad-item a-center j-center mt-3" v-for="item in menu" :key="item.img" 
+			hover-class="bg-light-secondary" @click="jumpCate($event)">
+				<image :src="item.img" mode="widthFix" style="width:70px;height:70px"></image>
+				<text class="font-md mt-2 mb-2">{{item.text}}</text>
+			</div>
+		</div>
+		<!-- 广告位 -->
+		<image src="../../static/del/1.jpg" class="mt-4 mb-1 ml-1 mr-1" style="width:100% ;height: 220px;border-radius: 140px;"  mode=""></image>
+		<!-- 精选推荐 -->
+		<div>
+			<!-- 头部 -->
+			<div class="row a-center j-sb py-2 px-3 border-bottom border-light-secondary">
+				<div class="j-center" style="flex-direction: row;">
+					<div class="header-left"></div>
+					<text style="font-size: 35px;" class="header-text">精选推荐</text>
+				</div>
+				<text class="main-text-color ml-auto font-md">更多</text>
+			</div>
+			<!-- 内容滚动推荐商品 -->
+			 <scroller class="w-100 flex-row" style="height: 400px;" :show-scrollbar="false" scroll-direction="horizontal">
+			    <div class="scroll-row-item p-2" style="width: 250px;" v-for=" i in 10" :key="i">
+			    	<div class="d-flex flex-column a-center j-center text-center ">
+			    		<image src="/static/del/12.jpg" style="width: 215px;height: 180px;" mode=""></image>
+			    		<text class="font-sm over-flow-eli font pt-1" style="width: 200px;text-align: center;">精品精品面</text>
+			    		<!-- 价格组件分离 -->
+						<price priceStyle="font-size:35px">1.5</price>
+						<text class="main-bg-color text-white" style="border-radius: 35px;text-align: center;height: 40px;line-height:40px;width: 140px;">+购物车</text>
+			    	</div>
+			    </div>
+			  </scroller>
+			  <!-- 新鲜蔬菜 -->
+			  <div class="flex-column j-center">
+				  <!-- 广告 -->
+			  	<div class="px-2">
+			  		<image src="../../static/bg.jpg" mode="" class="" style="width:100% ;height: 230px;border-radius: 10px;"></image>
+			  	</div>
+				<!-- 商品列表  px-2-->
+				<div class="row px-2 py-2 border-bottom">
+					<div class="col-4">
+						<image src="../../static/del/1.jpg" style="width: 240px;" mode="widthFix"></image>
+					</div>
+					<div class="ml-1 flex-1">
+						<text class="font-md font-weight-100 mt-1">白菜</text>
+						<text class="text-muted font my-1">描述描述描述述描述</text>
+						<!-- 标签 -->
+						<div class="row">
+							<text class="font px-1 mr-2" style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+						</div>				
+						<div class="row j-sb px-1 py-1" style="position: relative;">
+							<price priceStyle="font-size:35px">1.6</price>
+							<div class="ml-auto text-center position-relative text-white main-bg-color  font-weight-100 d-flex a-center j-center" style="width:50px;height:50px;border-radius: 25px;font-size: 35px;">
+							<text class="myfont text-white">&#xe61a;</text>				
+							</div>
+							<text class='car-badge text-white a-center j-center'>1</text>
+						</div>
+					</div>
+				</div>
+				<!-- 查看更多 -->
+				<text class="text-secondary font-md my-2" style="text-align: center;">查看更多 > </text>
+			  </div>
+			  
+			  <!-- 新鲜蔬菜2 -->
+			  <div class="flex-column j-center">
+				  <!-- 广告 -->
+			  	<div class="px-2">
+			  		<image src="../../static/bg.jpg" mode="" class="" style="width:100% ;height: 230px;border-radius: 10px;"></image>
+			  	</div>
+			  				<!-- 商品列表  px-2-->
+					<div class="row px-2 py-2 border-bottom flex-nowrap"  v-for="i in 3">
+						<div class="col-4">
+							<image src="../../static/del/1.jpg" style="width: 240px;" mode="widthFix"></image>
+						</div>
+						<div class="ml-1">
+							<text class="font-md font-weight-100 mt-1">白菜</text>
+							<text class="text-muted font my-1">描述描述描述描述描述描述描述描述描述</text>
+							
+							<!-- 标签 -->
+							<div class="row">
+								<text class="font px-1 mr-2" style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+								<text class="font px-1 mr-2" style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+								<text class="font px-1 mr-2" style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包侧个人</text>
+							</div>				
+							<div class="row j-sb px-1 py-1" style="position: relative;">
+								<price priceStyle="font-size:35px">1.6</price>
+								<div class="ml-auto text-center position-relative text-white main-bg-color  font-weight-100 d-flex a-center j-center" style="width:50px;height:50px;border-radius: 25px;font-size: 35px;">
+								<text class="myfont text-white">&#xe61a;</text>	
+								</div>
+								<text class='car-badge text-white a-center j-center'>1</text>
+							</div>
+							
+						</div>
+					</div>
+					<!-- 查看更多 -->
+					<text class="text-secondary font-md my-2" style="text-align: center;">查看更多 > </text>
+			  				
+			  				
+			  				
+			  			
+			  </div>
+		</div>
+		</cell>
+		
+      </list>
+
+	  
+	</div>
+
+</template>
+<script>
+	import {
+		mapState,
+		mapActions,
+		mapMutations
+	} from 'vuex'
+	import price from '@/components/index/nvue/price.nvue'
+	import myswiper from '@/components/index/nvue/mySwiper.nvue'
+	
+	export default {
+		components:{
+			price,myswiper
+		},
+		onNavigationBarSearchInputClicked(){
+			
+			uni.navigateTo({
+				url: '/pages/search/search'
+			});
+		},
+		created(){
+			this.initFont()
+		},
+		data: {
+			loadingShow:'hide',
+			swipers: [{
+					src: "/static/images/gg1.jpg",
+
+				},
+				{
+					src: "/static/images/gg2.jpg",
+
+				},
+				{
+					src: "/static/images/gg3.jpg",
+				}
+			],
+			menu:[
+				{img:'/static/images/sc3.png',text:'点我跳转'},
+				{img:'/static/images/sg.png',text:'新鲜水果'},
+				{img:'/static/images/suic.png',text:'水产新鲜'},
+				{img:'/static/images/rs.png',text:'禽畜肉蛋'},
+				{img:'/static/images/ly.png',text:'粮油米面'},
+				{img:'/static/images/bh.png',text:'茶水百货'},
+				{img:'/static/images/gh.png',text:'干货调品'},
+				{img:'/static/images/gh.png',text:'干货调品'},
+			]
+		},
+		methods: {
+			initFont(){
+				let domModule = weex.requireModule('dom');
+				domModule.addRule('fontFace',{
+				  'fontFamily': "iconfont",
+				  'src': "url('https://at.alicdn.com/t/font_1968838_44p1sibni2n.ttf')"
+				})
+			},
+			onLoading(){
+				this.loadingShow='show';
+				setTimeout(()=>{
+					//加载数据
+					this.loadingShow='hide'
+					
+				},2000)
+				
+			},
+			jumpCate(e){
+				console.log(e.target.style.backgroundColor='red');
+			}
+
+		},
+		computed: {
+
+		}
+
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style src="@/common/common.css"></style>
+<style src "@/common/iconfont-shucai.css"></style>
+<style scoped>
+	.myfont{
+		   font-family:iconfont;
+		    font-size:30px;
+			font-style:normal;
+	}
+	.gadHover{
+		background-color: #F1F1F1!important;
+	}
+	.slider-box {
+		height: 300px;
+	}
+	.gad {
+		/* margin-left: 30px;
+		margin-right: 30px; */
+	}
+
+	.gad-item {
+		/*  border-color:red;
+		  border-width: 1px; */
+		width: 172.5px;
+		height: 150px;
+		/* padding-left:30px;
+		padding-right:10px; */
+		margin-left: 2.5px;
+		margin-right: 2.5px;
+	/*    border-style: solid;
+		border-width: 1px;
+		border-color: red;
+ */
+	}
+	
+	.header-text{
+		position: relative;
+	}
+	.header-left{
+	    margin-top: 3px;
+		margin-right: 10px;
+		width: 8px;
+		height: 35px;
+		background-color: #45C36F;
+	}
+	.car-badge{
+		position: absolute;
+		top:5px;
+		right:0px;
+		width:30px;
+		height: 30px;
+		font-size: 20px;
+		border-radius: 50%;
+		background-color: #FF5D60;
+		text-align: center;
+	}
+	
+	.iconfon{
+	  font-family: "iconfont" !important;
+	  font-size: 16px;
+	  font-style: normal;
+	
+	}
+</style>
+<!-- 下下下 上上下下上下 -->

@@ -1,0 +1,43 @@
+<template>
+	<div class="line-h font-weight mb-1" >
+		<div class="row  font line-h font-weight-100 mt-1">
+			<text  style="margin-top: 20px;" class="price-color font">￥</text>
+			<text :class="['font-weight',color]" :style="priceStyle">
+				<slot />
+			</text>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:{
+			color:{
+				type:String,
+				default:"price-color"
+			},
+			priceSize:{
+				type:String,
+				default:"font-lg"
+			},
+			iconSize:{
+				type:String,
+				default:""
+			},
+			priceStyle:{
+				type:String,
+				default:"font-size: 30px"
+			},
+			iconStyle:{
+				type:String,
+				default:""
+			}
+			
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style src="@/common/common.css"></style>
+<style>
+
+</style>

@@ -1,0 +1,1 @@
+<view class="position-absolute top-0 left-0 right-0 bottom-0 d-flex flex-column j-center a-center animated fadeIn faster"><image style="width:243rpx;" src="{{getImage}}" mode="widthFix" lazy-load="{{true}}"></image><text class="text-light-muted font-md mt-3">{{msg}}</text></view>

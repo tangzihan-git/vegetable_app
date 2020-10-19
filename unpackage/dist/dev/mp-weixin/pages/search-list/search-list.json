@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "search-list": "/components/search-list/search-list",
+    "uni-drawer": "/components/uni-ui/uni-drawer/uni-drawer",
+    "card": "/components/common/card",
+    "scradio-group": "/components/common/scradio-group"
+  }
+}

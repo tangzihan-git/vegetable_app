@@ -1,0 +1,267 @@
+<template>
+	<div>
+		<div class="row px-2" style="height: 150px;background-color: white;">
+			<!-- 一级分类 -->
+			 <scroller class="w-100 flex-row"  id="topClass"  :show-scrollbar="false" scroll-direction="horizontal">
+				<div class="mx-1 row" v-for="i in 8" :key="i" :id="'topClass'+i" :ref="'topClass'+i">
+					<div class="flex-column a-center j-center" @click="changeClass(i,$event)">
+						<div class="d-flex a-center" :class="i==classIndex?'cateActive':''">
+							<image src="../../static/bg.jpg" style="width:75px;height:75px;border-radius: 32px;"></image>
+						</div>
+						<text class="font-sm text-dark mt-1 px-1 " style="height:35px;border-radius: 40px;line-height: 35px;"
+						:class="i==classIndex?'main-bg-color text-white':'text-dark'" 
+						>一级分{{i}}</text>
+					</div>
+				</div>
+			</scroller>
+		</div>
+		<!-- 二级分类 -->
+		<scroller class="nav-left" id="tab" :show-scrollbar="false" scroll-direction="vertical">
+			<text style="font-size: 25px;" class="text-center px-2 nav-left-item  border-color text-dark" 
+			v-for="i in 100" :key="i"  :class="i===tabIndex?'active':''" @click="changeTab(i,$event)"  :ref="'text'+i" :id="'text'+i">二级类{{i}}</text>
+		</scroller>
+		<!-- 筛选 -->
+		<div class="nav-right"  ref="box">
+			<div class="filter border-bottom  a-center" style="flex-direction: row-reverse;">
+				<div class="row flex-nowrap">
+					<text class="mx-1 font ">综合</text>
+					<text class="mx-1 font ">销量</text>
+					<div class="row" @click="orderByPrice">
+						<text class="ml-1 font font-weight main-text-color" >价格</text>
+						<div class="">
+							<text class="myfont"  style="font-size: 20px;" :class="priceStatus==true?'main-text-color':'text-muted'">&#xeb59;</text>
+							<text class="myfont " style="font-size: 20px;line-height: 10px;" :class="priceStatus==false?'main-text-color':'text-muted'">&#xeb58;</text>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!-- 商品列表 -->
+		<scroller class="nav-right" :show-scrollbar="false" scroll-direction="vertical" style="margin-top: 100px;" >
+			<div class="row px-2 py-2 border-bottom a-center flex-nowrap" v-for="i in 10">
+				<div class="col-3 ">
+					<image src="../../static/del/1.jpg" style="width: 185px;height:190px;border-radius: 28px;" mode="widthFix"></image>
+				</div>
+				<div class="ml-1  flex-1" >
+					<text class="font-md font-weight-100 mt-1">白菜</text>
+					<text class="text-muted font my-1">描述描述描述</text>
+					<!-- 标签 -->
+					<div class="row ">
+						<text class="font px-1 ml-1" 
+						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮人看</text>
+						<text class="font px-1 ml-1"
+						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+						<text class="font ml-1 px-1"
+						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+					</div>			
+					<div class="row j-sb px-1 py-1 " style="position: relative;" > 
+						<price priceStyle="font-size:35px">1.6</price>
+						<!-- 购物车 -->
+						<div class="ml-auto text-center position-relative text-white main-bg-color font-weight-100 d-flex a-center j-center" 
+						style="width:50px;height:50px;border-radius: 25px;font-size: 35px;" @click="test">
+							<text class="myfont text-white">&#xe61a;</text>
+						</div>
+						<text class='car-badge text-white a-center j-center'>1</text>
+					</div>
+				</div>
+			</div>
+		</scroller>
+	</div>
+</template>
+<script>
+	import price from '@/components/index/nvue/price.nvue'
+	const dom = weex.requireModule('dom')
+	export default {
+		onNavigationBarSearchInputClicked(){	
+			uni.navigateTo({
+				url: '/pages/search/search'
+			});
+		},
+		components:{
+			price
+		},
+	
+		mounted (e) {
+			
+		   this._initHandle()
+		},
+		created(){
+			
+		},
+		onShow(){
+			//获取首页传递的类别id
+			var classId =  uni.getStorageSync('classId');
+			console.log(classId)
+		},
+		data:{
+			tabIndex:1,
+			classIndex:1,
+			navBottom:0,
+			classRight:0,
+			priceStatus:1
+		},
+		methods:{
+			_initHandle(){
+				//获取侧板栏离页面底部的距离
+				const query = uni.createSelectorQuery().in(this);
+				query.select('#tab').boundingClientRect(data => {
+				  this.navBottom = data.bottom
+				
+				}).exec();
+				//初始化字体图标
+				dom.addRule('fontFace',{
+				  'fontFamily': "iconfont",
+				  'src': "url('https://at.alicdn.com/t/font_1968838_44p1sibni2n.ttf')"
+				})
+				//初始化一级分类
+				query.select('#topClass').boundingClientRect(data => {
+				  this.classRight = data.right
+				
+				}).exec();
+				query.select('#topClass5').boundingClientRect(data => {
+				  console.log(data);
+				
+				}).exec();
+				
+				
+			},
+			//顶部一级分类
+			changeClass(i,e){
+			
+				this.classIndex = i
+				const query = uni.createSelectorQuery().in(this);
+				query.select('#topClass'+i).boundingClientRect(data => {
+				  // console.log(data.bottom);
+				  //倒数2个元素被点击时滚动到页面顶部
+				  // console.log(data);
+				  if(Math.abs(data.right - this.classRight)<=100){
+						dom.scrollToElement(this.$refs['topClass'+i][0], { offset: 0 })
+				  }
+				  
+				}).exec();
+			},
+			//侧边二级分类
+			changeTab(i,e){
+				this.tabIndex=i
+				// console.log(this.$refs['text'+i]);
+				const query = uni.createSelectorQuery().in(this);
+				query.select('#text'+i).boundingClientRect(data => {
+				  // console.log(data.bottom);
+				  //倒数2个元素被点击时滚动到页面顶部
+				  if(Math.abs(data.bottom - this.navBottom)<=100)
+						dom.scrollToElement(this.$refs['text'+i][0], { offset: 0 })
+				  
+				}).exec();
+			},
+			//价格升序降序
+			orderByPrice(){
+				
+				this.priceStatus=!this.priceStatus
+			}
+			
+			
+		}
+	}
+</script>
+<style src="@/common/zcm-main-nvue.css"></style>
+<style src="@/common/common.css"></style>
+<style src "@/common/iconfont-shucai.css"></style>
+<style scoped>
+.myfont{
+	font-family:iconfont;
+	font-size:30px;
+	font-style:normal;
+}
+.border-color{
+	border-color: #ECECEC;
+}
+.nav-left {
+	background-color: #f8f8f8;
+	position: absolute;
+	left: 0;
+	top: 150px;
+	bottom: 0;
+	min-width: 160px;
+
+}
+.nav-left text{
+	border-left: 8upx solid #FEFEFE;
+	border-right: 8upx solid #FEFEFE;
+}
+.nav-left-item {
+	height: 100px;
+	font-size: 30px;
+	line-height: 100px;
+}
+
+.nav-right {
+/* 	width: 78%;
+	position: absolute;
+	left: 22%;
+	top: 160rpx;
+	bottom: 0; */
+	width: 590px;
+	
+	/* background-color: red; */
+	position: absolute;
+	top:150px;
+	right:0
+}
+
+.nav-right-item {
+	width: 28%;
+	height: 220rpx;
+	float: left;
+	text-align: center;
+	padding: 11rpx;
+	font-size: 28rpx;
+}
+
+.nav-right-item image {
+	width: 120upx;
+	height: 120upx;
+}
+
+.active {
+	border-left-width: 5px;
+	border-left-style: solid;
+	border-left-color: #45C36F;
+	background-color: #ffffff !important;
+	font-weight:bold
+	
+}
+.active text{
+	border-left: 8upx solid #FD6B04;
+	width: 100%;
+	text-align: center;
+}
+.border-bottom{ border-color: #F4F4F4; }
+.text{
+	width: 100px;
+	height: 50px;
+	background-color: red;
+}
+.cateActive{
+	border-radius: 32px;
+	padding: 2px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: #45C36F;
+}
+.filter{
+	height: 100px;
+}
+.car-badge{
+	position: absolute;
+	top:5px;
+	right:0px;
+	width:30px;
+	height: 30px;
+	font-size: 20px;
+	border-radius: 50%;
+	background-color: #FF5D60;
+	text-align: center;
+}
+	
+</style>

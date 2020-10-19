@@ -1,0 +1,6 @@
+
+.rounded.data-v-349f8cc9{ border-radius: 12rpx!important;
+}
+.card.data-v-349f8cc9, .card-body.data-v-349f8cc9{ overflow: hidden;
+}
+

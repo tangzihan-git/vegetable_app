@@ -1,0 +1,1 @@
+<view class="p-2"><price class="mt-2" vue-id="dd3b5682-1" priceStyle="font-size:45rpx" iconStyle="font-size:30rpx" bind:__l="__l" vue-slots="{{['default']}}">{{detail.price}}</price><view class="font-lg">{{detail.title}}</view><view class="font text-light-muted mb-3 line-h-sm">{{''+detail.desc+''}}</view></view>

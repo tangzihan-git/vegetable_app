@@ -1,0 +1,1 @@
+<view class="d-flex a-center j-center px-5 py-3"><block wx:for="{{providerList}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="flex-1 d-flex a-center j-center"><view class="{{['iconfont font-lg text-white  d-flex a-center j-center rounded-circle',item.icon+' '+item.bgColor]}}" style="width:100rpx;height:100rpx;"></view></view></block></view>

@@ -1,0 +1,31 @@
+/* 加载更多 */
+.loadmore {
+	height: 70px;
+	width: 750px;
+	flex-direction: column;
+	justify-content: center;
+}
+.loadmore-text {
+	font-size: 30px;
+	text-align: center;
+	color: #999999;
+}
+/* 下拉刷新 */
+.refresh {
+	width: 750px;
+	height: 70px;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.refresh-text {
+	text-align: center;
+	font-size: 28px;
+	color: #999999;
+}
+/* 公共列表 */
+ .common-list{
+	  flex-direction: row;
+	  flex-wrap: wrap;
+ }
+ 
