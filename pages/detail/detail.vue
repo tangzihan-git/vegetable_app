@@ -4,6 +4,7 @@
 		<swiper-image :resdata="banners" :height="730" preview></swiper-image>
 		<!-- 基础详情 -->
 		<base-info :detail="detail"></base-info>
+		
 		<!-- 滚动商品属性 -->
 		<!-- <scroll-attrs></scroll-attrs> -->
 		
@@ -83,7 +84,7 @@
 		</card> -->
 		<!-- 底部操作条 -->
 		<!-- 占位 -->
-		<bottom-btn></bottom-btn>
+		<bottom-btn @addCar="addCar"></bottom-btn>
 		<!-- 弹出框 -->
 		<common-popup :popupClass="popup.attr" @hide="hide('attr')">
 			<!-- 属性筛选框 -->
@@ -166,6 +167,7 @@
 	import scradioGroup from "@/components/common/scradio-group.vue"
 	import uniNumberBox from "@/components/uni-ui/uni-number-box/uni-number-box.vue"
 	import uniListItem from "@/components/uni-ui/uni-list-item/uni-list-item.vue"
+	import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 	export default {
 		components:{
 			swiperImage,
@@ -289,6 +291,7 @@
 			console.log(this.goods)
 		},
 		methods: {
+			...mapActions(['doAddCar','doUpdateCar']),
 			hide(key){
 				console.log(key)
 				this.popup[key] ='hide'
@@ -304,6 +307,13 @@
 			},
 			changeRadio(index){
 				this.label.item.selected = index
+			},
+			addCar(){
+			    this.doAddCar(this.goods)
+			    uni.setTabBarBadge({
+			    	index:2,
+			    	text:`${this.countCar}`
+			    })
 			}
 		}
 	}

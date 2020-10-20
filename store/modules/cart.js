@@ -50,6 +50,7 @@ export default{
 			let arr = state.list.map(function(item){
 			    return item.num;
 			})
+			if(arr.length==0)return
 			let res = arr.reduce(function(tem,item,index){
 			    return tem+item;
 			})
@@ -105,6 +106,8 @@ export default{
 			state.list = state.list.filter(v=>{
 				return state.selectedList.indexOf(v.id)===-1
 			})
+			
+			
 		},
 		//全选
 		selectAll(state){

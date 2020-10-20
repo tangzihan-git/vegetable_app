@@ -69,7 +69,7 @@
 				<view class="flex-1 d-flex a-center j-center font-md ">
 
 				</view>
-				<view @click="doDelGoods" class="flex-1 d-flex j-center a-center main-bg-color text-white font-md a-stretch "
+				<view @click="delGoods" class="flex-1 d-flex j-center a-center main-bg-color text-white font-md a-stretch "
 				 hover-class="bg-hover-bg-color">
 					<view class="d-flex j-center a-center">
 						删除
@@ -133,6 +133,14 @@
 				uni.navigateTo({
 					url: '/pages/order-comfirm/order-comfirm'
 				});
+			},
+			delGoods(){
+				this.doDelGoods()
+				console.log('hello word')
+				uni.setTabBarBadge({
+					index:2,
+					text:23
+				})
 			}
 		},
 		computed: {

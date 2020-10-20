@@ -5,10 +5,8 @@
 		<div class="slider-box main-bg-color px-3 py-1"></div>
 		<!-- 轮播 -->
 		<myswiper :swipers="swipers"></myswiper>
-		
 		<!-- 占位 -->
 		<div class="mb-5 mt-5" style="height: 1px;"></div>
-		
 		<!-- 九宫格 -->
 		<div class="row gad mt-5 px-2" >
 			<div class="gad-item a-center j-center mt-3" v-for="item in menu" :key="item.img" 
@@ -16,13 +14,9 @@
 				<image :src="item.img" mode="widthFix" style="width:70px;height:70px"></image>
 				<text class="font-md mt-2 mb-2">{{item.text}}</text>
 			</div>
-			
-			
 		</div>
 		<!-- 广告位 -->
-		
 		<image  src="../../static/del/1.jpg" class="mt-4 mb-1 ml-1 mr-1" style="width:100% ;height: 220px;border-radius: 140px;"  mode=""></image>
-		
 		<!-- 精选推荐 -->
 		<div>
 		<!-- 头部 -->
@@ -37,14 +31,12 @@
 		 <scroller class="w-100 flex-row" style="height: 400px;" :show-scrollbar="false" scroll-direction="horizontal">
 			<div class=" p-2" style="width: 250px;" v-for="item,index in goodsReco" :key="item.id">
 				<div @click="detail(item)" class="d-flex flex-column a-center j-center text-center ">
-					
-					
 					<image :src="item.primary_pic_url" style="width: 215px;height: 180px;" mode=""></image>
 					
 					<text class="font-sm over-flow-eli font pt-1" style="width: 200px;text-align: center;text-overflow:ellipsis;lines: 1;" >{{item.goods_name}}</text>
 					<!-- 价格组件分离 -->
 					<price priceStyle="font-size:35px">{{item.unit_price}}</price>
-					<text @click="addCar(item)" class="main-bg-color text-white" style="border-radius: 35px;text-align: center;height: 40px;line-height:40px;width: 140px;">+购物车
+					<text  @click="addCar(item)" class="main-bg-color text-white" style="border-radius: 35px;text-align: center;height: 40px;line-height:40px;width: 140px;">+购物车
 					
 					</text>
 					<text  v-for="car in car_list" v-if="car.id==item.id" class='car-badge text-white a-center j-center'>{{car.num}}</text>
@@ -60,16 +52,15 @@
 			<!-- 商品列表  分类 px-2-->
 			<div class="mt-2  px-2  py-2 flex-row j-sb ">
 				<!-- 菜单 -->
-				<a href="#" v-for="item,index in shopCate" :key="item.id" @click="toggleMenu(index)">
+				<a href="#" v-for="item,index in shopCate" :key="item.id" @click="toggleMenu(index,item.categoryId)">
 					<text class="font-weight font-md" :class="{'main-text-color':index==MenuIndex}">{{item.title}}</text>
 					<text class="shop-little text-center text-secondary px-1" :class="{'main-bg-color':index==MenuIndex,'text-white':index==MenuIndex}">{{item.text}}</text>
 				</a>
-			
 			</div>
 			 <!-- <scroller class="scroller flex-row" scroll-direction="horizontal" offset-accuracy="100"> -->
-			 <slider @change="scroll($event)" offset-x-accuracy="100" class="slider flex-row" :infinite="false" auto-play="false" :index="MenuIndex">
-			    <div class="flex-shfrink" v-for="item,index in shopCate" :ref="'text'+index">
-			    	<div  @click="detail()" class="w-100 px-1 bg-light-secondary flex-row flex-wrap" style="justify-content: space-around;">
+			 <slider @change="scroll($event)" :style="{height:this.sliderBarHeight}" offset-x-accuracy="100" class="slider flex-row" :infinite="false" auto-play="false" :index="MenuIndex">
+			    <div class="flex-shfrink" v-for="item,index in shopCate" >
+			    	<div  @click="detail()" :id="'sliderBar'+index" class="w-100 px-1 bg-light-secondary flex-row flex-wrap" style="justify-content: space-around;">
 			    		<div v-for="goods in item.goodsList" :key="goods.id" class="flex-column j-sb mt-2 bg-white px-2 py-2 mr-1 position-relative" style="border-radius: 20px;width:345px;height: auto;">
 			    			<div>
 			    				<image :src="goods.primary_pic_url"  style="border-radius: 20px;" mode=""></image>
@@ -101,7 +92,6 @@
 			 </slider>
 				<!-- 列表  | 滚动区域-->
 		  </div>
-	
 		</div>
 		</cell>
       </list>
@@ -114,25 +104,24 @@
 	import $ from '@/common/request.js'
 	import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 	const dom = weex.requireModule('dom')
-	
 	export default {
 		components:{
 			price,myswiper
 		},
 		onNavigationBarSearchInputClicked(){
-			
 			uni.navigateTo({
 				url: '/pages/search/search'
 			});
 		},
 		beforeMount() {
-			//更新购物车
-			this.doUpdateCar()
-		},
-		mounted(){
 			
 		},
+		mounted(){
+			this.initSliderHeight()	
+		},
 		created(){
+			//更新购物车
+			this.doUpdateCar()
 			//获取推荐商品
 			this.getGoodsReco()
 			//初始化字体
@@ -140,20 +129,22 @@
 			console.log(this.car_list)
 		},
 		onShow(){
-			
+			// console.log('test')
+			// console.log(this.goodsReco)
 			uni.setTabBarBadge({
 				index:2,
-				text:`${this.countCar}`
+				text:`${this.countCar ? this.countCar : 0}`
 			})
-		
 			// console.log(this.car_list)
 		},
 		data: {
+			sliderBarHeight:'',
 			flag:false,
 			startX:0,
 			stopX:0,
 			loadingShow:'hide',
 			MenuIndex:0,
+			categoryId:2,
 			swipers: [{
 					src: "/static/images/gg1.jpg",
 
@@ -180,6 +171,7 @@
 				{
 					'title':'猜你喜欢',
 					'text':'优质好货',
+					'categoryId':2,
 					goodsList:[
 						{
 								"id": 1,
@@ -222,6 +214,7 @@
 				{
 					'title':'时令新品',
 					'text':'应季新货',
+					'categoryId':8,
 					goodsList:[
 						{
 								"id": 1,
@@ -278,8 +271,8 @@
 						
 					]
 				},
-				{'title':'元气早餐','text':'营养不重样'},
-				{'title':'上班带餐','text':'全是好东西'}
+				{'title':'元气早餐','text':'营养不重样','categoryId':27},
+				{'title':'上班带餐','text':'全是好东西','categoryId':28}
 			],
 			goodsReco:[
 				
@@ -315,10 +308,15 @@
 				    url: '/pages/class/class'
 				});
 			},
-			toggleMenu(index){
-				console.log(index)
+			toggleMenu(index,categoryId){
 				//改变当前激活标识，跳转指定元素
+				
 				this.MenuIndex = index
+				this.categoryId = categoryId
+				
+				
+				//动态设置滚动区域高度
+				// this.initSliderHeight()
 
 				
 			},
@@ -326,11 +324,12 @@
 				//滑动时栏目激活
 				this.MenuIndex = e.index
 				
-			},
-			scroll1(e){
-			 		
+				//动态设置滚动区域高度
+				this.initSliderHeight()
+				
 				
 			},
+			
 			detail(item){
 				//将商品数据缓存页面传参
 				uni.setStorage({
@@ -344,11 +343,16 @@
 			},
 			//获取推荐商品
 			getGoodsReco(){
+				
 				$.get('goods-list',{
 					isHot:1,
 					categoryId:0
 				}).then(data=>{
+			        uni.setStorage({
+			        	key:'goods_reco',
+			        })
 				    if(!this.goodsReco.length){
+						console.log('请求推荐商品')
 						this.goodsReco  = data.data.data
 					}
 				})
@@ -376,14 +380,19 @@
 			},
 			//添加到购物车
 			addCar(item){
-				
 				this.doAddCar(item)
 				uni.setTabBarBadge({
 					index:2,
 					text:`${this.countCar}`
 				})
-				
-				
+			},
+			initSliderHeight(){
+				const query = uni.createSelectorQuery().in(this);
+				query.select(`#sliderBar${this.MenuIndex}`).boundingClientRect(data => {
+				  // console.log("得到布局位置信息" +data.height);
+				  this.sliderBarHeight = data.height+'px'
+				  console.log("节点离页面顶部的距离为" + data.top);
+				}).exec();
 			}
 		
 

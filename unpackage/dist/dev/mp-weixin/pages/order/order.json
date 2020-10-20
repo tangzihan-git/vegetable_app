@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "我的订单",
   "usingComponents": {
-    "order": "/components/order/order",
-    "nodata": "/components/common/nothing"
+    "nodata": "/components/common/nothing",
+    "order": "/components/order/order"
   }
 }

@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "添加收货地址",
+  "titleNView": {},
+  "scrollIndicator": "none",
+  "bounce": "none",
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "uni-swipe-action": "/components/uni-ui/uni-swipe-action/uni-swipe-action",
+    "uni-swipe-action-item": "/components/uni-ui/uni-swipe-action-item/uni-swipe-action-item"
+  }
+}

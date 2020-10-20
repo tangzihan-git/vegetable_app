@@ -1,0 +1,11 @@
+{
+  "titleNView": false,
+  "scrollIndicator": "none",
+  "bounce": "none",
+  "usingComponents": {
+    "loading-plus": "/common/mixin/loading-plus",
+    "uni-nav-bar": "/components/uni-ui/uni-nav-bar/uni-nav-bar",
+    "price": "/components/common/price",
+    "uni-number-box": "/components/uni-ui/uni-number-box/uni-number-box"
+  }
+}

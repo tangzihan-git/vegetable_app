@@ -20,7 +20,8 @@
     "pages/order-detail/order-detail",
     "pages/about/about",
     "pages/logis-detail/logis-detail",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/user-path-list/user-path-list"
   ],
   "subPackages": [],
   "window": {

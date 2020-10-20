@@ -7,7 +7,7 @@
     "urlCheck": false
   },
   "compileType": "miniprogram",
-  "libVersion": "",
+  "libVersion": "2.9.2",
   "appid": "touristappid",
   "projectname": "pifashu1",
   "condition": {

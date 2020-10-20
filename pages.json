@@ -13,6 +13,7 @@
 				"app-plus":{
 					"bounce":"none",
 					
+					
 					// "titleNView":false 
 					"scrollIndicator":"none",
 					
@@ -304,6 +305,10 @@
 					}
 				}
 			}
+        }
+        ,{
+            "path" : "pages/user-path-list/user-path-list",
+            "style" : {}
         }
     ],
 	"globalStyle": {

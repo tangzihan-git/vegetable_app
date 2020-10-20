@@ -1,0 +1,28 @@
+{
+  "scrollIndicator": "none",
+  "titleNView": {
+    "searchInput": {
+      "align": "left",
+      "backgroundColor": "#f7f7f7",
+      "borderRadius": "4px",
+      "disabled": false,
+      "placeholder": "新鲜包菜",
+      "placeholderColor": "#cccccc"
+    },
+    "buttons": [
+      {
+        "color": "#989898",
+        "colorPressed": "#45c36f",
+        "float": "right",
+        "fontSize": "16px",
+        "text": "搜索"
+      }
+    ]
+  },
+  "usingComponents": {
+    "uni-drawer": "/components/uni-ui/uni-drawer/uni-drawer",
+    "card": "/components/common/card",
+    "scradio-group": "/components/common/scradio-group",
+    "search-list": "/components/search-list/search-list"
+  }
+}

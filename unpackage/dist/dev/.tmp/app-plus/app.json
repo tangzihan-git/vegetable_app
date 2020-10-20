@@ -1,0 +1,145 @@
+{
+  "pages": [
+    "pages/cart/cart",
+    "pages/my/my",
+    "pages/user-set/user-set",
+    "pages/user-info/user-info",
+    "pages/user-path-list/user-path-list",
+    "pages/user-path-edit/user-path-edit",
+    "pages/test/test",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/search/search",
+    "pages/search-list/search-list",
+    "pages/order/order",
+    "pages/order-comfirm/order-comfirm",
+    "pages/pay-methods/pay-methods",
+    "pages/pay-result/pay-result",
+    "pages/order-detail/order-detail",
+    "pages/about/about",
+    "pages/logis-detail/logis-detail",
+    "pages/detail/detail",
+    "pages/user-path-list/user-path-list"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "蔬菜批发",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#b5b5b5",
+    "selectedColor": "#45c36f",
+    "borderStyle": "white",
+    "backgroundColor": "#F6F7F9",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/tabbars/index.png",
+        "selectedIconPath": "static/tabbars/indexed.png"
+      },
+      {
+        "pagePath": "pages/class/class",
+        "text": "分类",
+        "iconPath": "/static/tabbars/class.png",
+        "selectedIconPath": "static/tabbars/classed.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "/static/tabbars/car.png",
+        "selectedIconPath": "/static/tabbars/cared.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "/static/tabbars/me.png",
+        "selectedIconPath": "/static/tabbars/meed.png"
+      }
+    ]
+  },
+  "nvue": {
+    "pages": {
+      "pages/index/index.html": {
+        "window": {
+          "usingComponents": {},
+          "bounce": "none",
+          "scrollIndicator": "none",
+          "titleNView": {
+            "backgroundColor": "#45c36f",
+            "searchInput": {
+              "align": "left",
+              "backgroundColor": "#ffffff",
+              "borderRadius": "40px",
+              "disabled": true,
+              "placeholder": "搜一搜",
+              "placeholderColor": "#cccccc"
+            },
+            "buttons": [
+              {
+                "color": "#ffffff",
+                "colorPressed": "#ffffff",
+                "float": "left",
+                "fontSize": "22px",
+                "fontSrc": "/static/iconfont.ttf",
+                "text": ""
+              },
+              {
+                "color": "#ffffff",
+                "colorPressed": "#ffffff",
+                "float": "right",
+                "fontSize": "22px",
+                "fontSrc": "/static/iconfont.ttf",
+                "text": ""
+              },
+              {
+                "color": "#ffffff",
+                "colorPressed": "#ffffff",
+                "float": "right",
+                "fontSize": "22px",
+                "fontSrc": "/static/iconfont.ttf",
+                "text": ""
+              }
+            ]
+          }
+        },
+        "nvue": true
+      },
+      "pages/class/class.html": {
+        "window": {
+          "usingComponents": {},
+          "bounce": "none",
+          "scrollIndicator": "none",
+          "titleNView": {
+            "backgroundColor": "#ffffff",
+            "searchInput": {
+              "align": "left",
+              "backgroundColor": "#f7f7f7",
+              "borderRadius": "4px",
+              "disabled": true,
+              "placeholder": "搜一搜",
+              "placeholderColor": "#cccccc"
+            }
+          }
+        },
+        "nvue": true
+      }
+    },
+    "entryPagePath": "pages/index/index"
+  },
+  "nvueCompiler": "weex",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "pifashu1",
+  "compilerVersion": "2.4.6",
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "no-thing": "/components/common/no-thing",
+    "loading": "/components/common/loading",
+    "loading-plus": "/common/mixin/loading-plus"
+  }
+}

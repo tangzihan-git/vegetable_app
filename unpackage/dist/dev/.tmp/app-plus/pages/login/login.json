@@ -1,0 +1,9 @@
+{
+  "bounce": "none",
+  "scrollIndicator": "none",
+  "titleNView": false,
+  "usingComponents": {
+    "main-btn": "/components/common/main-btn",
+    "other-login": "/components/common/other-login"
+  }
+}

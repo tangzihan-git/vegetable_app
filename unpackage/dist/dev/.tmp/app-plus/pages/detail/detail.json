@@ -1,0 +1,26 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "scrollIndicator": "none",
+  "bounce": "none",
+  "titleNView": {
+    "type": "transparent",
+    "buttons": [
+      {
+        "type": "menu"
+      }
+    ]
+  },
+  "usingComponents": {
+    "divider": "/components/common/divider",
+    "swiper-image": "/components/index/swiper-image",
+    "price": "/components/common/price",
+    "base-info": "/components/detail/base-info",
+    "u-parse": "/components/uni-ui/feng-parse/parse",
+    "card": "/components/common/card",
+    "bottom-btn": "/components/detail/bottom-btn",
+    "common-popup": "/components/common/common-popup",
+    "scradio-group": "/components/common/scradio-group",
+    "uni-number-box": "/components/uni-ui/uni-number-box/uni-number-box",
+    "uni-list-item": "/components/uni-ui/uni-list-item/uni-list-item"
+  }
+}

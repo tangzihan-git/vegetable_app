@@ -1,0 +1,8 @@
+{
+  "titleNView": false,
+  "usingComponents": {
+    "uni-status-bar": "/components/uni-ui/uni-nav-bar/uni-nav-bar",
+    "main-btn": "/components/common/main-btn",
+    "other-login": "/components/common/other-login"
+  }
+}
