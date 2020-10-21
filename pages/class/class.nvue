@@ -104,6 +104,7 @@
 		   this._initHandle()
 		},
 		created(){
+			
 			$.get('catalog-index').then(data=>{
 				this.categoryList = data.data.data.categoryList
 				// console.log(this.categoryList)
@@ -136,6 +137,10 @@
 			
 		},
 		onShow(){
+			this.classIndex = uni.getStorageSync('classId')
+			this.classId = uni.getStorageSync('classId')
+			this.showTab(classId )
+			this.selectGoods()
 			//获取首页传递的类别id
 			var classId =  uni.getStorageSync('classId');
 			// console.log(classId)
