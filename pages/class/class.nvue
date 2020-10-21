@@ -27,15 +27,15 @@
 		<div class="nav-right" ref="box">
 			<div class="filter border-bottom  a-center" style="flex-direction: row-reverse;">
 				<div class="row flex-nowrap">
-					<text class="mx-1 font " @click="orderShop('common')">综合</text>
-					<text class="mx-1 font " @click="orderShop('sell_volume')">销量</text>
+					<text class="mx-1 font " @click="orderShop('common')" :class="sortType=='common' ? 'font-weight main-text-color' : ''">综合</text>
+					<text class="mx-1 font " @click="orderShop('sell_volume')" :class="sortType=='sell_volume' ? 'font-weight main-text-color' : ''">销量</text>
 					<div class="row" @click="orderShop('retail_price')">
-						<text class="ml-1 font font-weight main-text-color" >价格</text>
+						<text class="ml-1 font " :class="sortType=='retail_price' ? 'font-weight main-text-color' : ''">价格</text>
 						<div class="">
-							<text class="myfont"  style="font-size: 20px;" :class="priceStatus==true?'main-text-color':'text-muted'">&#xeb59;</text>
-							<text class="myfont " style="font-size: 20px;line-height: 10px;" :class="priceStatus==false?'main-text-color':'text-muted'">&#xeb58;</text>
+							<text class="myfont"  style="font-size: 20px;" :class="priceStatus==true && sortType=='retail_price'?'main-text-color':'text-muted'">&#xeb59;</text>
+							<text class="myfont " style="font-size: 20px;line-height: 10px;" :class="priceStatus==false && sortType=='retail_price'?'main-text-color':'text-muted'">&#xeb58;</text>
 						</div>
-					</div>
+					</div> 
 					
 				</div>
 			</div>
@@ -78,6 +78,7 @@
 	const dom = weex.requireModule('dom')
 	export default {
 		data:{
+			sortType:'',//排序标识 价格、销量、综合
 			tabIndex:0,//当前二级菜单
 			classIndex:1,//当前一级菜单
 			classId:1,//分类id
@@ -231,22 +232,13 @@
 			},
 			//升序降序
 			orderShop(type){
-				switch (type){
-					case 'retail_price':
-						this.priceStatus=!this.priceStatus
-						let sort = this.priceStatus
-					case 'sell_volume':
-					   
-					
-					default:
-						break;
+				
+				this.sortType = type
+				if(type=='retail_price'){
+					this.priceStatus=!this.priceStatus
+					var sort = this.priceStatus
 				}
-				
-				this.priceStatus=!this.priceStatus
-				let sort = this.priceStatus
-				//  retail_price 排序
-				console.log(this.goods)
-				
+				if(type=='common')type='id';//综合排序暂时以id排序	
 				//数组对象排序
 				var compare = function (prop) {
 				    return function (obj1, obj2) {
