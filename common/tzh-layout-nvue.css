@@ -260,3 +260,16 @@
 .pr-4 { padding-right: 40px;}
 .pr-5 { padding-right: 50px;}
 
+/* 隐藏 */
+.show-line-1{
+	lines: 1;
+	text-overflow: ellipsis;
+}
+.show-line-2{
+	lines: 2;
+	text-overflow: ellipsis;
+}
+.show-line-3{
+	lines: 3;
+	text-overflow: ellipsis;
+}

@@ -3,30 +3,33 @@
 		<div class="row px-2" style="height: 150px;background-color: white;">
 			<!-- 一级分类 -->
 			 <scroller class="w-100 flex-row"  id="topClass"  :show-scrollbar="false" scroll-direction="horizontal">
-				<div class="mx-1 row" v-for="i in 8" :key="i" :id="'topClass'+i" :ref="'topClass'+i">
-					<div class="flex-column a-center j-center" @click="changeClass(i,$event)">
-						<div class="d-flex a-center" :class="i==classIndex?'cateActive':''">
-							<image src="../../static/bg.jpg" style="width:75px;height:75px;border-radius: 32px;"></image>
+				<div class="mx-1 row" v-for="category,i in categoryList" :key="category.id" :id="'topClass'+category.id" :ref="'topClass'+category.id">
+					<div class="flex-column a-center j-center" @click="changeClass(i,category.id,$event)">
+						<div class="d-flex a-center" :class="category.id==classIndex?'cateActive':''">
+							<image :src="category.icon_url" style="width:75px;height:75px;border-radius: 32px;"></image>
 						</div>
 						<text class="font-sm text-dark mt-1 px-1 " style="height:35px;border-radius: 40px;line-height: 35px;"
-						:class="i==classIndex?'main-bg-color text-white':'text-dark'" 
-						>一级分{{i}}</text>
+						:class="category.id == classIndex?'main-bg-color text-white':'text-dark'" 
+						>{{category.name}}</text>
 					</div>
 				</div>
 			</scroller>
 		</div>
 		<!-- 二级分类 -->
 		<scroller class="nav-left" id="tab" :show-scrollbar="false" scroll-direction="vertical">
-			<text style="font-size: 25px;" class="text-center px-2 nav-left-item  border-color text-dark" 
-			v-for="i in 100" :key="i"  :class="i===tabIndex?'active':''" @click="changeTab(i,$event)"  :ref="'text'+i" :id="'text'+i">二级类{{i}}</text>
+			<text style="font-size: 25px;width: 160px;" class="text-center px-2 nav-left-item  border-color text-dark"
+			:class="0===tabIndex?'active':''" @click="changeTab(0,classIndex,$event)"  :ref="'text0'" :id="'text0'">全部</text>
+			
+			<text style="font-size: 25px;width: 160px;" class="text-center px-2 nav-left-item  border-color text-dark" 
+			v-for="sub,i in currentSub" :key="sub.id"  :class="i+1===tabIndex?'active':''" @click="changeTab(i+1,sub.id,$event)"  :ref="'text'+i+1" :id="'text'+i+1">{{sub.name}}</text>
 		</scroller>
 		<!-- 筛选 -->
-		<div class="nav-right"  ref="box">
+		<div class="nav-right" ref="box">
 			<div class="filter border-bottom  a-center" style="flex-direction: row-reverse;">
 				<div class="row flex-nowrap">
-					<text class="mx-1 font ">综合</text>
-					<text class="mx-1 font ">销量</text>
-					<div class="row" @click="orderByPrice">
+					<text class="mx-1 font " @click="orderShop('common')">综合</text>
+					<text class="mx-1 font " @click="orderShop('sell_volume')">销量</text>
+					<div class="row" @click="orderShop('retail_price')">
 						<text class="ml-1 font font-weight main-text-color" >价格</text>
 						<div class="">
 							<text class="myfont"  style="font-size: 20px;" :class="priceStatus==true?'main-text-color':'text-muted'">&#xeb59;</text>
@@ -39,30 +42,29 @@
 		</div>
 		<!-- 商品列表 -->
 		<scroller class="nav-right" :show-scrollbar="false" scroll-direction="vertical" style="margin-top: 100px;" >
-			<div class="row px-2 py-2 border-bottom a-center flex-nowrap" v-for="i in 10">
+			<div @click="detail(item)" class="row px-2 py-2 border-bottom a-center flex-nowrap" v-for="item,index in goods">
 				<div class="col-3 ">
-					<image src="../../static/del/1.jpg" style="width: 185px;height:190px;border-radius: 28px;" mode="widthFix"></image>
+					<image :src="item.primary_pic_url" style="width: 185px;height:190px;border-radius: 28px;" mode="widthFix"></image>
 				</div>
 				<div class="ml-1  flex-1" >
-					<text class="font-md font-weight-100 mt-1">白菜</text>
-					<text class="text-muted font my-1">描述描述描述</text>
+					<text class="font-md font-weight-100 mt-1">{{item.goods_name}}</text>
+					<text class="text-muted font my-1 show-line-1">{{item.goods_brief}}</text>
 					<!-- 标签 -->
 					<div class="row ">
-						<text class="font px-1 ml-1" 
-						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮人看</text>
+					
 						<text class="font px-1 ml-1"
-						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">损坏即赔</text>
 						<text class="font ml-1 px-1"
 						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
 					</div>			
 					<div class="row j-sb px-1 py-1 " style="position: relative;" > 
-						<price priceStyle="font-size:35px">1.6</price>
+						<price priceStyle="font-size:35px">{{item.retail_price}}</price>
 						<!-- 购物车 -->
 						<div class="ml-auto text-center position-relative text-white main-bg-color font-weight-100 d-flex a-center j-center" 
-						style="width:50px;height:50px;border-radius: 25px;font-size: 35px;" @click="test">
+						style="width:50px;height:50px;border-radius: 25px;font-size: 35px;" @click="addCar(item)">
 							<text class="myfont text-white">&#xe61a;</text>
 						</div>
-						<text class='car-badge text-white a-center j-center'>1</text>
+						<text    v-for="car in car_list" v-if="car.id==item.id" class='car-badge text-white a-center j-center'>{{car.num}}</text>
 					</div>
 				</div>
 			</div>
@@ -71,8 +73,22 @@
 </template>
 <script>
 	import price from '@/components/index/nvue/price.nvue'
+	import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
+	import $ from '@/common/request.js'
 	const dom = weex.requireModule('dom')
 	export default {
+		data:{
+			tabIndex:0,//当前二级菜单
+			classIndex:1,//当前一级菜单
+			classId:1,//分类id
+			navBottom:0,
+			classRight:0,
+			priceStatus:1,
+			categoryList:[],//商品一级分类
+			subCategoryList:[],//商品二级分类 list
+			currentSub:{},//当前二级分类
+			goods:[]//商品列表
+		},
 		onNavigationBarSearchInputClicked(){	
 			uni.navigateTo({
 				url: '/pages/search/search'
@@ -87,21 +103,45 @@
 		   this._initHandle()
 		},
 		created(){
+			$.get('catalog-index').then(data=>{
+				this.categoryList = data.data.data.categoryList
+				// console.log(this.categoryList)
+				//保存二级菜单
+				this.categoryList.forEach(category=>{
+					if(category.subCategoryList.length){
+						let obj = {}
+						obj[`category-${category.id}`] = category.subCategoryList
+						this.subCategoryList.push(obj)
+						// [
+						// 	{
+						// 		'1':[
+						// 			{
+										
+						// 			},{
+										
+						// 			}
+						// 		]
+						// 	}
+						// ]
+					}
+				})
+				
+				//初始化二级分类
+				 this.showTab()
+				 //初始化商品
+				 this.selectGoods()
+			})
+			
 			
 		},
 		onShow(){
 			//获取首页传递的类别id
 			var classId =  uni.getStorageSync('classId');
-			console.log(classId)
+			// console.log(classId)
 		},
-		data:{
-			tabIndex:1,
-			classIndex:1,
-			navBottom:0,
-			classRight:0,
-			priceStatus:1
-		},
+		
 		methods:{
+			...mapActions(['doAddCar','doUpdateCar']),
 			_initHandle(){
 				//获取侧板栏离页面底部的距离
 				const query = uni.createSelectorQuery().in(this);
@@ -120,30 +160,54 @@
 				
 				}).exec();
 				query.select('#topClass5').boundingClientRect(data => {
-				  console.log(data);
+				  // console.log(data);
 				
 				}).exec();
 				
 				
 			},
-			//顶部一级分类
-			changeClass(i,e){
-			
-				this.classIndex = i
+			//顶部一级分类切换
+			changeClass(i,id,e){
+				//一级分类下的二级类
+			    this.showTab(id)
+				
+				this.classIndex = id
+				this.classId = id
+				this.tabIndex=0/*  */
+				//类别下的商品
+				this.selectGoods()
 				const query = uni.createSelectorQuery().in(this);
-				query.select('#topClass'+i).boundingClientRect(data => {
+				query.select('#topClass'+id).boundingClientRect(data => {
 				  // console.log(data.bottom);
 				  //倒数2个元素被点击时滚动到页面顶部
 				  // console.log(data);
 				  if(Math.abs(data.right - this.classRight)<=100){
-						dom.scrollToElement(this.$refs['topClass'+i][0], { offset: 0 })
+						dom.scrollToElement(this.$refs['topClass'+id][0], { offset: 0 })
 				  }
 				  
 				}).exec();
 			},
-			//侧边二级分类
-			changeTab(i,e){
+			//显示二级分类
+			showTab(id=this.classIndex){
+				try{
+					let obj = this.subCategoryList.find(sub=>{
+						return sub[`category-${id}`]
+					})
+					this.currentSub = obj[`category-${id}`]
+					console.log(this.currentSub)
+					
+				}catch(err){
+					console.log('not found subCategory')
+					this.currentSub=[]
+				}						
+			},
+			//切换tab
+			changeTab(i,id,e){
+				
 				this.tabIndex=i
+				this.classId = id
+				//类别下的商品
+				this.selectGoods()
 				// console.log(this.$refs['text'+i]);
 				const query = uni.createSelectorQuery().in(this);
 				query.select('#text'+i).boundingClientRect(data => {
@@ -154,14 +218,82 @@
 				  
 				}).exec();
 			},
-			//价格升序降序
-			orderByPrice(){
+			//显示商品列表
+			selectGoods(){
+				//根据分类id获取商品列表
+				let goods = $.get('goods-list',{
+					categoryId:this.classId
+				}).then(data=>{
+					this.goods = data.data.data
+					console.log(this.goods)
+				})
+				// console.log(goods)
+			},
+			//升序降序
+			orderShop(type){
+				switch (type){
+					case 'retail_price':
+						this.priceStatus=!this.priceStatus
+						let sort = this.priceStatus
+					case 'sell_volume':
+					   
+					
+					default:
+						break;
+				}
 				
 				this.priceStatus=!this.priceStatus
-			}
+				let sort = this.priceStatus
+				//  retail_price 排序
+				console.log(this.goods)
+				
+				//数组对象排序
+				var compare = function (prop) {
+				    return function (obj1, obj2) {
+				        var val1 = parseInt(obj1[prop]);
+				        var val2 = parseInt(obj2[prop]);
+						if (val1 < val2) {
+				            return sort? -1: 1
+				        } else if (val1 > val2) {
+				            return sort ? 1 :-1
+				        } else {
+				            return 0;
+				        }            
+				    } 
+				}
+				this.goods.sort(compare(type))
+				
+			},
+			//添加到购物车
+			addCar(item){
+				console.log('hellp w')
+				this.doAddCar(item)
+				uni.setTabBarBadge({
+					index:2,
+					text:`${this.countCar}`
+				})
+			},
+			detail(item){
+				//将商品数据缓存页面传参
+				uni.setStorage({
+					key:'goods',
+					data:item
+				})
+				
+				uni.navigateTo({
+					url: '/pages/detail/detail'
+				});
+			},
 			
 			
+		},
+		computed: {
+			...mapState({
+				car_list: state => state.cart.list
+			}),
+			...mapGetters(['countCar'])
 		}
+		
 	}
 </script>
 <style src="@/common/tzh-layout-nvue.css"></style>
