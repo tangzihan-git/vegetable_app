@@ -4,7 +4,7 @@
 			<!-- 一级分类 -->
 			 <scroller class="w-100 flex-row"  id="topClass"  :show-scrollbar="false" scroll-direction="horizontal">
 				<div class="mx-1 row" v-for="category,i in categoryList" :key="category.id" :id="'topClass'+category.id" :ref="'topClass'+category.id">
-					<div class="flex-column a-center j-center" @click="changeClass(i,category.id,$event)">
+					<div class="flex-column a-center j-center" @click="changeClass(category.id)">
 						<div class="d-flex a-center" :class="category.id==classIndex?'cateActive':''">
 							<image :src="category.icon_url" style="width:75px;height:75px;border-radius: 32px;"></image>
 						</div>
@@ -98,9 +98,7 @@
 		components:{
 			price
 		},
-	
 		mounted (e) {
-			
 		   this._initHandle()
 		},
 		created(){
@@ -127,27 +125,25 @@
 						// ]
 					}
 				})
-				
 				//初始化二级分类
 				 this.showTab()
 				 //初始化商品
 				 this.selectGoods()
 			})
-			
-			
 		},
 		onShow(){
-			this.classIndex = uni.getStorageSync('classId')
-			this.classId = uni.getStorageSync('classId')
-			this.showTab(classId )
-			this.selectGoods()
+			this.classIndex = uni.getStorageSync('classId') ? uni.getStorageSync('classId') : 1
+			this.classId = uni.getStorageSync('classId') ? uni.getStorageSync('classId') : 1
+			this.changeClass(this.classId)
 			//获取首页传递的类别id
-			var classId =  uni.getStorageSync('classId');
+			// var classId =  uni.getStorageSync('classId');
 			// console.log(classId)
 		},
-		
+		onHide() {
+			uni.removeStorageSync('classId');
+		},
 		methods:{
-			...mapActions(['doAddCar','doUpdateCar']),
+			
 			_initHandle(){
 				//获取侧板栏离页面底部的距离
 				const query = uni.createSelectorQuery().in(this);
@@ -173,7 +169,7 @@
 				
 			},
 			//顶部一级分类切换
-			changeClass(i,id,e){
+			changeClass(id){
 				//一级分类下的二级类
 			    this.showTab(id)
 				
@@ -186,7 +182,7 @@
 				query.select('#topClass'+id).boundingClientRect(data => {
 				  // console.log(data.bottom);
 				  //倒数2个元素被点击时滚动到页面顶部
-				  // console.log(data);
+			      //切换特效有bug 待改善 9.21
 				  if(Math.abs(data.right - this.classRight)<=100){
 						dom.scrollToElement(this.$refs['topClass'+id][0], { offset: 0 })
 				  }
@@ -200,7 +196,7 @@
 						return sub[`category-${id}`]
 					})
 					this.currentSub = obj[`category-${id}`]
-					console.log(this.currentSub)
+					// console.log(this.currentSub)
 					
 				}catch(err){
 					console.log('not found subCategory')
@@ -209,7 +205,6 @@
 			},
 			//切换tab
 			changeTab(i,id,e){
-				
 				this.tabIndex=i
 				this.classId = id
 				//类别下的商品
@@ -231,13 +226,12 @@
 					categoryId:this.classId
 				}).then(data=>{
 					this.goods = data.data.data
-					console.log(this.goods)
+					// console.log(this.goods)
 				})
 				// console.log(goods)
 			},
 			//升序降序
 			orderShop(type){
-				
 				this.sortType = type
 				if(type=='retail_price'){
 					this.priceStatus=!this.priceStatus
@@ -261,15 +255,7 @@
 				this.goods.sort(compare(type))
 				
 			},
-			//添加到购物车
-			addCar(item){
-				console.log('hellp w')
-				this.doAddCar(item)
-				uni.setTabBarBadge({
-					index:2,
-					text:`${this.countCar}`
-				})
-			},
+			
 			detail(item){
 				//将商品数据缓存页面传参
 				uni.setStorage({

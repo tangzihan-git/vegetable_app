@@ -32,7 +32,6 @@
 			<div class=" p-2" style="width: 250px;" v-for="item,index in goodsReco" :key="item.id">
 				<div @click="detail(item)" class="d-flex flex-column a-center j-center text-center ">
 					<image :src="item.primary_pic_url" style="width: 215px;height: 180px;" mode=""></image>
-					
 					<text class="font-sm over-flow-eli font pt-1" style="width: 200px;text-align: center;text-overflow:ellipsis;lines: 1;" >{{item.goods_name}}</text>
 					<!-- 价格组件分离 -->
 					<price priceStyle="font-size:35px">{{item.unit_price}}</price>
@@ -56,12 +55,13 @@
 					<text class="font-weight font-md" :class="{'main-text-color':index==MenuIndex}">{{item.title}}</text>
 					<text class="shop-little text-center text-secondary px-1" :class="{'main-bg-color':index==MenuIndex,'text-white':index==MenuIndex}">{{item.text}}</text>
 				</a>
+				
 			</div>
 			 <!-- <scroller class="scroller flex-row" scroll-direction="horizontal" offset-accuracy="100"> -->
-			 <slider @change="scroll($event)" :style="{height:this.sliderBarHeight}" offset-x-accuracy="100" class="slider flex-row" :infinite="false" auto-play="false" :index="MenuIndex">
+			 <slider @change="scroll($event)" style="min-height:550px" :style="{height:this.sliderBarHeight}" offset-x-accuracy="100" class="slider flex-row" :infinite="false" auto-play="false" :index="MenuIndex">
 			    <div class="flex-shfrink" v-for="item,index in shopCate" >
-			    	<div  @click="detail()" :id="'sliderBar'+index" class="w-100 px-1 bg-light-secondary flex-row flex-wrap" style="justify-content: space-around;">
-			    		<div v-for="goods in item.goodsList" :key="goods.id" class="flex-column j-sb mt-2 bg-white px-2 py-2 mr-1 position-relative" style="border-radius: 20px;width:345px;height: auto;">
+			    	<div  @click="detail()" :id="'sliderBar'+index" class="w-100 px-2 bg-light-secondary flex-row flex-wrap" style="justify-content: space-between;">
+			    		<div v-for="goods in item.goodsList" :key="goods.id" class="flex-column j-sb mt-2 bg-white px-2 py-2  position-relative" style="border-radius: 20px;width:345px;height: auto;">
 			    			<div>
 			    				<image :src="goods.primary_pic_url"  style="border-radius: 20px;" mode=""></image>
 			    				<div class="mt-1">
@@ -75,7 +75,6 @@
 			    						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width:10px;height: 30px;line-height: 30px;text-align: center;font-size: 20px;">包邮</text>
 			    						<text class="font px-1 mr-1"
 			    						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width:10px;height: 30px;line-height: 30px;text-align: center;font-size: 20px;">30分钟必达</text>
-			    						
 			    					</div>
 			    				</div>
 			    			</div> 
@@ -90,7 +89,7 @@
 			    </div> 
 			<!-- </scroller> -->
 			 </slider>
-				<!-- 列表  | 滚动区域-->
+			<!-- 列表  | 滚动区域-->
 		  </div>
 		</div>
 		</cell>
@@ -138,7 +137,7 @@
 			// console.log(this.car_list)
 		},
 		data: {
-			sliderBarHeight:'',
+			sliderBarHeight:500,
 			flag:false,
 			startX:0,
 			stopX:0,
@@ -173,29 +172,7 @@
 					'text':'优质好货',
 					'categoryId':2,
 					goodsList:[
-						{
-								"id": 1,
-								"goods_name": "猜你喜欢1",
-								"goods_number": 102,
-								"keywords": "从产品设计、界面设计到功能开发的代码编写，全部由小T技术团队完成",
-								"goods_brief": "从产品设计、界面设计到功能开发的代码编写，全部由小T技术团队完成",
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						},
-						{
-								"id": 2,
-								"goods_name": "猜你喜欢2",
-								"goods_number": 102,
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"goods_brief": "从产品设计、界面设计到功能开发的代码编写，全部由小T技术团队完成",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						},
+						
 						{
 								"id": 3,
 								"goods_name": "猜你喜欢3",
@@ -227,46 +204,6 @@
 								"is_new": 1,
 								"goods_unit": "",
 								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						},
-						{
-								"id": 2,
-								"goods_name": "时令新品2",
-								"goods_number": 102,
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						},
-						{
-								"id": 3,
-								"goods_name": "时令新品3",
-								"goods_number": 102,
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						},
-						{
-								"id": 4,
-								"goods_name": "时令新品3",
-								"goods_number": 102,
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						},
-						{
-								"id": 5,
-								"goods_name": "时令新品3",
-								"goods_number": 102,
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
 						}
 						
 					]
@@ -291,10 +228,8 @@
 				this.loadingShow='show';
 				setTimeout(()=>{
 					//加载数据
-					this.loadingShow='hide'
-					
+					this.loadingShow='hide';
 				},2000)
-				
 			},
 			jumpCate(id){
 				// console.log(e.target.style.backgroundColor='red');
@@ -305,20 +240,16 @@
 				})
 				
 				uni.switchTab({
-				    url: '/pages/class/class'
+				    url: '/pages/class/class?test=2'
 				});
 			},
 			toggleMenu(index,categoryId){
 				//改变当前激活标识，跳转指定元素
-				
 				this.MenuIndex = index
 				this.categoryId = categoryId
 				
-				
 				//动态设置滚动区域高度
-				// this.initSliderHeight()
-
-				
+				// this.initSliderHeight()				
 			},
 			scroll(e){
 				//滑动时栏目激活
@@ -326,6 +257,7 @@
 				
 				//动态设置滚动区域高度
 				this.initSliderHeight()
+				
 				
 				
 			},
@@ -391,7 +323,7 @@
 				query.select(`#sliderBar${this.MenuIndex}`).boundingClientRect(data => {
 				  // console.log("得到布局位置信息" +data.height);
 				  this.sliderBarHeight = data.height+'px'
-				  console.log("节点离页面顶部的距离为" + data.top);
+				  console.log("节点离页面顶部的距离为 初始化高度" + data.top);
 				}).exec();
 			}
 		

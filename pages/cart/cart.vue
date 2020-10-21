@@ -8,9 +8,13 @@
 		<view class="py-5  d-flex a-center j-center bg-white" v-if="disabledAll">
 			<view class="iconfont icon-gouwuche text-light-muted" style="font-size:50upx"></view>
 			<text class="text-light-muted mx-2">购物车还是空的</text>
-			<view class="px-2 py-1 border border-light-secondary rounded" hover-class="bg-light-secondary">
-				去逛逛
-			</view>
+			
+				<view @click="goHome()" class="px-2 py-1 border border-light-secondary rounded" hover-class="bg-light-secondary">
+					去逛逛
+					
+				</view>
+			
+			
 		</view>
 		<!-- 购物车列表 -->
 		<view class="bg-white px-2">
@@ -45,7 +49,7 @@
 		<!-- <view style="height: 100upx;"></view> -->
 		<!-- 合计 -->
 		<template v-if="!isedit">
-			<view v-if="!disabledAll" class="d-flex a-center position-fixed left-0 right-0 bottom-0 j-center border-top border-light-secondary a-stretch "
+			<view v-if="!disabledAll" class="bg-white d-flex a-center position-fixed left-0 right-0 bottom-0 j-center border-top border-light-secondary a-stretch "
 			 style="height: 100upx;z-index: 100;">
 				<label class="radio d-flex a-center j-center flex-shfrink" style="width: 120upx;">
 					<radio @click="doSelect" color="#45c36f" :checked="selectAll" :disabled="disabledAll" />
@@ -61,7 +65,7 @@
 			</view>
 		</template>
 		<template v-else>
-			<view v-if="!disabledAll" class="d-flex a-center position-fixed left-0 right-0 bottom-0 j-center border-top border-light-secondary a-stretch "
+			<view v-if="!disabledAll" class="bg-white d-flex a-center position-fixed left-0 right-0 bottom-0 j-center border-top border-light-secondary a-stretch "
 			 style="height: 100upx;z-index: 100;">
 				<label class="radio d-flex a-center j-center flex-shfrink" style="width: 120upx;">
 					<radio @click="doSelect" color="#45c36f" :checked="selectAll" :disabled="disabledAll" />
@@ -141,6 +145,11 @@
 					index:2,
 					text:23
 				})
+			},
+			goHome(){
+				uni.switchTab({
+				    url: '/pages/index/index'
+				});
 			}
 		},
 		computed: {

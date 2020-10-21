@@ -2,15 +2,23 @@
 	<view>
 		<!-- 排序|筛选 -->
 		<view class="d-flex border-top border-bottom a -center" style="height:100upx">
-			<view class="flex-1 d-flex a-center j-center font-md" 
-			v-for="item,index in screen.list" :key="index" @click="changeScreen(index)">
-				<text :class="screen.currentIndex===index?'main-text-color':'text-muted'">{{item.name}}</text>
+			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('common')">
+				<text :class="sortType==='common'?'main-text-color font-weight':'text-muted'">综合</text>
+				
+			</view>
+			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('sell_volume')">
+				<text :class="sortType==='sell_volume'?'main-text-color font-weight':'text-muted'">销量</text>
+				
+			</view>
+			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('retail_price')">
+				<text :class="sortType==='retail_price'?'main-text-color font-weight':'text-muted'">价格</text>
 				<view>
 				<!-- 排序按钮 -->	
-					<view  class="iconfont icon-jiangxu1-copy line-h" style="font-size: 10px;" :class="item.status===1?'main-text-color':'text-light-muted'"></view>
-					<view  class="text-light-muted iconfont icon-jiangxu1 line-h" style="font-size: 10px;" :class="item.status===2?'main-text-color':'text-light-muted'"></view>
+					<view  class="iconfont icon-jiangxu1-copy line-h" style="font-size: 10px;" :class="priceStatus==true && sortType=='retail_price'?'main-text-color':'text-light-muted'"></view>
+					<view  class="text-light-muted iconfont icon-jiangxu1 line-h" style="font-size: 10px;" :class="priceStatus==false && sortType=='retail_price'?'main-text-color':'text-light-muted'"></view>
 				</view>
 			</view>
+			
 			<view class="flex-1 d-flex a-center j-center font-md" @click="openDrawer">
 				<text class="text-muted main-text-color">筛选</text>
 			</view>
@@ -32,7 +40,7 @@
 		    <!-- </view> -->
 		</uni-drawer>
 		<!-- 商品列表 -->
-		<block v-for="item,index in list " :key="index">
+		<block v-for="item,index in goods " :key="item.id">
 			<search-list :item="item" :index="index"></search-list>
 		</block>
 		
@@ -45,6 +53,7 @@
 	import scradioGroup from "@/components/common/scradio-group.vue"
 	
 	import searchList from "@/components/search-list/search-list.vue"
+	import {mapState,mapGetters,mapActions,mapMutations} from 'vuex'
 	export default {
 	    components: {uniDrawer,card,scradioGroup,searchList},
 		data() {
@@ -66,39 +75,82 @@
 						{name:'three'}
 					]
 				},
-				list:[
-					{
-						title:'白菜',
-						cover:"/static/del/1.jpg",
-						desc:"好好都i为佛教哦i文件发客人分回复额我发你",
-						price:"1.5",
-						paynum:"23",
-					}
-				]
+				sortType:'common',
+				priceStatus:1,
+				word:'',
+				goods:[]//商品列表
 				
 			}
 		},
+		onLoad(e) {
+			this.word = e.word
+			this.searchGoods()
+		},
 		methods: {
-			changeScreen(index){
-				//判断当前是否是激活状态
-				let oldIndex = this.screen.currentIndex
-				let oldItem = this.screen.list[oldIndex]
-				//处于激活状态
-				if(oldIndex===index){
-					return oldItem.status = oldItem.status===1?2:1
-				}
-				let newItem = this.screen.list[index]
-				//移除已激活状态
-				oldItem.status=0
-				this.screen.currentIndex=index
-				//增加激活状态
-				newItem.status=1
+			...mapActions(['doAddCar','doUpdateCar']),
+		changeScreen(index){
+			//判断当前是否是激活状态
+			let oldIndex = this.screen.currentIndex
+			let oldItem = this.screen.list[oldIndex]
+			//处于激活状态
+			if(oldIndex===index){
+				return oldItem.status = oldItem.status===1?2:1
+			}
+			let newItem = this.screen.list[index]
+			//移除已激活状态
+			oldItem.status=0
+			this.screen.currentIndex=index
+			//增加激活状态
+			newItem.status=1
 		},
 		 openDrawer(){
 			 this.$refs.drawer.open()
 		 },
 		 changeRadio(index){
 			 this.label.selected = index
+		 },
+		 searchGoods(){
+			 console.log(this.word)
+			 this.$.get('goods-list',{
+				 keyword:this.word,
+				 categoryId:0
+			 }).then(data=>{
+				 this.goods= data.data.data
+				 console.log(this.goods)
+			 })
+		 },
+		 //升序降序
+		 orderShop(type){
+		 	this.sortType = type
+		 	if(type=='retail_price'){
+		 		this.priceStatus=!this.priceStatus
+		 		var sort = this.priceStatus
+		 	}
+		 	if(type=='common')type='id';//综合排序暂时以id排序	
+		 	//数组对象排序
+		 	var compare = function (prop) {
+		 	    return function (obj1, obj2) {
+		 	        var val1 = parseInt(obj1[prop]);
+		 	        var val2 = parseInt(obj2[prop]);
+		 			if (val1 < val2) {
+		 	            return sort? -1: 1
+		 	        } else if (val1 > val2) {
+		 	            return sort ? 1 :-1
+		 	        } else {
+		 	            return 0;
+		 	        }            
+		 	    } 
+		 	}
+		 	this.goods.sort(compare(type))
+		 	
+		 },
+		 //添加到购物车
+		 addCar(item){
+		 	this.doAddCar(item)
+		 	uni.setTabBarBadge({
+		 		index:2,
+		 		text:`${this.countCar}`
+		 	})
 		 }
 	}
 }

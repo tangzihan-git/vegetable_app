@@ -1,5 +1,5 @@
 <template>
-	<view class="px-2 py-1 border d-inline-block m-1" :style="getStyle" >{{item.name}}</view>
+	<view @click="sendSearch(item.name)" class="px-2 py-1 border d-inline-block m-1" :style="getStyle" >{{item.name}}</view>
 </template>
 
 <script>
@@ -11,6 +11,11 @@
 			color:{
 				type:Boolean,
 				default:true
+			}
+		},
+		methods:{
+			sendSearch(name){
+				this.$emit('sendSearch',name)
 			}
 		},
 		computed:{
