@@ -19,11 +19,11 @@
 					</view>
 				</view>
 			</template>
-			
+			<!-- 验证码登录 -->
 			<template v-else>
 				<view class="mb-2 d-flex a-stretch">
 					<view class="border-bottom d-flex a-center j-center font px-2">+86</view>
-					<input type="text" v-model="phone" placeholder="手机号" class="border-bottom uni-input p-2 flex-1" />
+					<input type="text" v-model="username" placeholder="手机号" class="border-bottom uni-input p-2 flex-1" />
 				</view>
 				<view class="mb-2 d-flex j-sb">
 					<input type="text" v-model="code" placeholder="请输入验证码" class="border-bottom uni-input p-2" />
@@ -69,8 +69,9 @@
 				username:"17628197244",
 				password:"11111111",
 				phone:"17628197244",
-				code:"",
+				code:"1234",
 				codeTime:0,
+				ema:''
 			}
 		},
 		onLoad(){
@@ -99,6 +100,7 @@
 				var timer=''
 				 timer = setInterval(()=>{
 					// clearInterval(timer)
+					
 					if(this.codeTime>=1){
 						this.codeTime--
 					}else{
@@ -106,6 +108,12 @@
 						clearInterval(timer)
 					}
 				},1000)
+				this.$.get(`sendCode/${this.username}`).then(data=>{
+					//缓存验证码
+					if(data.statusCode==201){
+						this.ema = data.data.key
+					}
+				})
 				
 				
 			},
@@ -129,7 +137,21 @@
 			},
 			//提交
 			submit(){
-				
+				if(!this.status){
+					return this.$.post('ema',{
+						captcha_key:this.ema,
+						mobile:this.username,
+						captcha_code:this.code
+					}).then(data=>{
+						if(data.data.code==401){
+							return this.$U.showToast(data.data.message)
+						}
+						uni.setStorageSync('access_token', data.data.access_token);
+						uni.reLaunch({
+						    url: '/pages/my/my?access_token='+data.data.access_token
+						});
+					})
+				}
 				
 				if(!this.validate())return;
 				
@@ -152,7 +174,7 @@
 		},
 		computed:{
 			disabled(){
-				if((this.username === '' || this.password === '') && (this.phone ==='' || this.code === ''))return true;
+				if((this.username === '' || this.password === '') && (this.username ==='' || this.code === ''))return true;
 				return false
 			}
 		}
