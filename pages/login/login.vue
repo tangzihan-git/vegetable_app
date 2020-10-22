@@ -159,7 +159,9 @@
 					username:this.username,
 					password:this.password
 				}).then(res=>{
-					console.log(res)
+					if(res.data.code==401){
+						return this.$U.showToast(res.data.message)
+					}
 					if(res.data.access_token){
 						//缓存token方便授权认证
 						// console.log(res.data)
