@@ -2315,11 +2315,13 @@ var render = function() {
                 "v-uni-navigator",
                 { attrs: { url: "../login/login", _i: 6 } },
                 [
-                  _c(
-                    "v-uni-view",
-                    { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-                    [_vm._v("点我登录页面")]
-                  )
+                  _vm._$g(7, "i")
+                    ? _c(
+                        "v-uni-view",
+                        { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
+                        [_vm._v("登录/注册")]
+                      )
+                    : _vm._e()
                 ],
                 1
               ),

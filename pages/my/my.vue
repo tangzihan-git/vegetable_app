@@ -10,10 +10,10 @@
 			<image src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3468000183,662932090&fm=26&gp=0.jpg" style="height: 320rpx;width: 100%;" mode=""></image>
 			<!-- 用户相关 -->
 			<view class="d-flex a-center position-absolute left-0 right-0" style="bottom:50rpx">
-				<image :src="avatar" style="width:145rpx;height: 145rpx;border:5rpx solid" 
+				<image :src="avatar?avatar:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3512222076,2472343844&fm=26&gp=0.jpg'" style="width:145rpx;height: 145rpx;border:5rpx solid" 
 				class="ml-4 rounded-circle border-light" mode=""></image>
 				<navigator url="../login/login">
-					<view class="ml-2 text-white font-md">点我登录页面</view>
+					<view v-if="!avatar" class="ml-2 text-white font-lg">登录/注册</view>
 				</navigator>
 				<view class="d-flex a-center j-center a-self-end ml-auto mr-5 px-4" 
 				style="height: 60rpx;background-color: #ffd43f;color:#cc4a00;border-radius: 40rpx;">
