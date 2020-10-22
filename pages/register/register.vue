@@ -12,7 +12,7 @@
 				
 				<view class="mb-2 d-flex a-stretch">
 					<view class="border-bottom d-flex a-center j-center font px-2">+86</view>
-					<input type="text" v-model="phone" placeholder="手机号" class="border-bottom uni-input p-2 flex-1" />
+					<input type="text" v-model="mobile" placeholder="手机号" class="border-bottom uni-input p-2 flex-1" />
 				</view>
 				<view class="mb-2 d-flex a-stretch">
 					
@@ -60,8 +60,8 @@
 			return {
 				status:true,
 				username:"tzh001",
-				password:"TZH0810",
-				phone:"17628197244",
+				password:"11111111",
+				mobile:"17628197244",
 				code:"1234",
 				codeTime:0,
 				imgCode:'',
@@ -72,7 +72,7 @@
 			}
 		},
 		onLoad(){
-			this.getImgCode()
+			// this.getImgCode()
 		},
 		methods: {
 			back(){
@@ -81,7 +81,7 @@
 				})
 			},//初始化表单
 			initForm(){
-				this.username = this.password = this.phone = this.code = ''
+				this.username = this.password = this.mobile = this.code = ''
 			},
 			openlogin(){
 				uni.navigateTo({
@@ -90,83 +90,75 @@
 			},
 			//图像验证码
 			getImgCode(){
-				if(this.phone==''){
+				if(this.mobile==''){
 					this.$U.showToast('请输入手机号')
 					return false;
 				}
-				uni.request({
-				    url: `${this.$C.webUrl}/captchas`, //仅为示例，并非真实接口地址。
-				    data: {
-				        phone:this.phone
-				    },
-					method:'POST',
-				    success: ({data}) => {
-						// console.log(data)
-						if(data.errors){
-							this.$U.showToast(data.errors.phone[0])
-							return false;
-						}
-						
-						this.imgCode = data.captcha_image_content;
-						//缓存验证码码key
-						uni.setStorage({
-						    key: 'captcha_key',
-						    data: data.captcha_key,
-						});
-				    }
-				});
+				this.$.post('captchas',{
+					mobile:this.mobile
+				}).then(({data})=>{
+					
+					if(data.errors){
+						this.$U.showToast(data.errors.mobile[0])
+						return false;
+					}
+					
+					this.imgCode = data.captcha_image_content;
+					//缓存验证码码key
+					uni.setStorage({
+					    key: 'captcha_key',
+					    data: data.captcha_key,
+					});
+				})
+				
+				
 			},
 			//获取短信验证码
 			getCode(){
-				if(this.codeTime>0){
+				if(this.codeTime>0 || !this.validate()){
 					return;
 				}
-				if(!this.validate())return;
+				
 				uni.getStorage({
 				    key: 'captcha_key',
 				    success: (res)=>{
-					   uni.request({
-					       url: `${this.$C.webUrl}/verificationCodes`, 
-						   method:'POST',
-					       data: {
-					           captcha_key:res.data,
-							   captcha_code:this.random
-					       },
-					       success: ({data}) => {
-					           // console.log(res.data);
-							   if(data.message){
-								   this.$U.showToast(data.message)
-								   return false;
-							   }else{
-								   // console.log(data)
-								   //存储短信验证码key
-								   uni.setStorage({
-								       key: 'verification_key',
-								       data: data.key,
-								   });
-								   //计时开始
-								   this.codeTime = 60
-								   var timer=''
-								    timer = setInterval(()=>{
-								   	// clearInterval(timer)
-								   	if(this.codeTime>=1){
-								   		this.codeTime--
-								   	}else{
-								   		this.codeTime=0
-								   		clearInterval(timer)
-								   	}
-								   },1000)
-							   }
-					           // this.text = 'request success';
-					       }
-					   }); 
+						this.$.post('verificationCodes',{
+							captcha_key:res.data,
+							captcha_code:this.random
+						}).then(({data})=>{
+							
+							if(data.message && data.code==401){
+							   this.$U.showToast(data.message)
+							   return false;
+							}else{
+							   // console.log(data)
+							   //存储短信验证码key
+							   uni.setStorage({
+								   key: 'verification_key',
+								   data: data.key,
+							   });
+							   //计时开始
+							   this.codeTime = 60
+							   var timer=''
+								timer = setInterval(()=>{
+								// clearInterval(timer)
+								if(this.codeTime>=1){
+									this.codeTime--
+								}else{
+									this.codeTime=0
+									clearInterval(timer)
+								}
+							   },1000)
+							}
+						})
+					   
 				    }
 					
 				});
 			},
 			//表单验证
 			validate(){
-				if(!(/^1[3456789]\d{9}$/.test(this.phone))){ 
+				if(!(/^1[3456789]\d{9}$/.test(this.mobile))){ 
 					uni.showToast({
 						title:'无效的手机号',
 						'icon':'none'
@@ -193,33 +185,33 @@
 				uni.getStorage({
 				    key: 'verification_key',
 				    success: (res)=>{
-						uni.request({
-						    url: `${this.$C.webUrl}/users`, //仅为示例，并非真实接口地址。
-							method:'POST',
-						    data: {
-						       verification_key:res.data,
-							   verification_code:this.code,
-							   password:this.password,
-							   username:this.username,		   
-						    },
-						    success: (res) => {
-								if(res.data.message){
-									this.$U.showToast('验证码错误请重新输入')
-									return false;
-								}
-						        this.$U.showToast('注册成功，请返回登录')
-								uni.removeStorage({key: 'captcha_key'})
-								uni.removeStorage({key: 'verification_key'})
-								
-						    }
-						});
+						console.log(res.data)
+						console.log(this.code)
+						console.log(this.password)
+						console.log(this.username)
+						this.$.post('users',{
+							verification_key:res.data,
+							verification_code:this.code,
+							password:this.password,
+							name:this.username,	
+						}).then(res=>{
+							
+							if(res.data.message){
+								this.$U.showToast('验证码错误请重新输入')
+								return false;
+							}
+							this.$U.showToast('注册成功，请返回登录')
+							uni.removeStorage({key: 'captcha_key'})
+							uni.removeStorage({key: 'verification_key'})
+						})
+						
 					}
 				})
 			}
 		},
 		computed:{
 			disabled(){
-				if((this.username === '' || this.password === '') && (this.phone ==='' || this.code === ''))return true;
+				if((this.username === '' || this.password === '') && (this.mobile ==='' || this.code === ''))return true;
 				return false
 			}
 		}

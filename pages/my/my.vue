@@ -7,10 +7,10 @@
 		    <!-- 消息按钮 -->
 			<!-- <view class="iconfont icon-xiaoxi position-absolute text-white" style="font-size: 50rpx;top:75rpx;right:20rpx;z-index: 100;"></view> -->
 			<!-- 背景图片 -->
-			<image src="../../static/bg.jpg" style="height: 320rpx;width: 100%;" mode=""></image>
+			<image src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3468000183,662932090&fm=26&gp=0.jpg" style="height: 320rpx;width: 100%;" mode=""></image>
 			<!-- 用户相关 -->
 			<view class="d-flex a-center position-absolute left-0 right-0" style="bottom:50rpx">
-				<image src="../../static/userpic.png" style="width:145rpx;height: 145rpx;border:5rpx solid" 
+				<image :src="avatar" style="width:145rpx;height: 145rpx;border:5rpx solid" 
 				class="ml-4 rounded-circle border-light" mode=""></image>
 				<navigator url="../login/login">
 					<view class="ml-2 text-white font-md">点我登录页面</view>
@@ -61,9 +61,7 @@
 		<uni-list-item title="意见反馈" :showExtraIcon="true"  otherIconStyle="color:red"></uni-list-item>
 		<uni-list-item title="联系客服" :showExtraIcon="true"   otherIconStyle="color:red"></uni-list-item>
 		<uni-list-item title="关于我们" :showExtraIcon="true" @click="navigate('about')" ></uni-list-item>
-		<uni-list-item title="ui首页" :showExtraIcon="true" @click="jumpIndex" ></uni-list-item>
 		<divider></divider>
-		{{test}}
 		
 		<uni-list-item @click="navigate('user-set')" title="更多设置" :showExtraIcon="true"  otherIconStyle="color:red"></uni-list-item>
 	</view>
@@ -82,11 +80,57 @@
 		},	
 		data() {
 			return {
+				'avatar':'',
+				name:'',
 				
+			}
+		},
+		onLoad(e) {
+			//根据token获取用户信息
+			if(e.access_token){
+				this.getUserInfo(e.access_token)
+			}else if(uni.getStorageSync('access_token')){
+				this.getUserInfo(uni.getStorageSync('access_token'))
 			}
 		},
 		methods: {
 			...mapActions(['doAddTest']),
+			//获取用户信息
+			getUserInfo(token){
+				this.$.get('user',{
+					
+				},{
+					header:{
+						Accept:'application/json',
+						Authorization:'Bearer '+token
+					}
+					
+				}).then(data=>{
+					console.log(data)
+					if(data.statusCode == 401){
+						uni.showModal({
+							title: '提示',
+							content: '身份认证过期请重新登录',
+							showCancel: true,
+							cancelText: '取消',
+							confirmText: '确定',
+							success: res => {
+								if(res.confirm){
+									uni.navigateTo({
+										url: '/pages/login/login',
+				
+									});
+								}
+							},
+							fail: () => {},
+							complete: () => {}
+						});
+					}
+					this.avatar = data.data.data.avatar
+					this.name = data.data.data.name
+					
+				})
+			},
 			navigate(path){
 				// console.log('fg')
 				if(!path){

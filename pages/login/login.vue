@@ -10,7 +10,7 @@
 			<template v-if="status">
 				<!-- 账号密码登录 -->
 				<view class="mb-2">
-					<input type="text" v-model="username" placeholder="用户名,手机号邮箱" class="border-bottom uni-input p-2" />
+					<input type="text" v-model="username" placeholder="手机号" class="border-bottom uni-input p-2" />
 				</view>
 				<view class="mb-2 d-flex justify-between">
 					<input type="text" v-model="password" placeholder="请输入密码" class="border-bottom uni-input p-2" />
@@ -66,9 +66,9 @@
 		data() {
 			return {
 				status:true,
-				username:"",
-				password:"TZH0810",
-				phone:"17628197245",
+				username:"17628197244",
+				password:"11111111",
+				phone:"17628197244",
 				code:"",
 				codeTime:0,
 			}
@@ -130,28 +130,24 @@
 			//提交
 			submit(){
 				
-				// console.log('tr')
-				if(!this.validate())return;
-				uni.request({
-				    url: `${this.$C.webUrl}/authorizations`, 
-					method:'POST',
-				    data: {
-				        username:this.username,
-						password:this.password
-				    },
-				    success: (res) => {
-						// console.log(res.data)
-				        if(res.data.access_token){
-							//缓存token方便授权认证
-							// console.log(res.data)
-							 uni.setStorageSync('access_token', res.data.access_token);
-							 uni.reLaunch({
-							     url: '/pages/test/test'
-							 });
-						}
 				
-				    }
-				});
+				if(!this.validate())return;
+				
+				this.$.post('authorizations',{
+					username:this.username,
+					password:this.password
+				}).then(res=>{
+					console.log(res)
+					if(res.data.access_token){
+						//缓存token方便授权认证
+						// console.log(res.data)
+						 uni.setStorageSync('access_token', res.data.access_token);
+						 uni.reLaunch({
+						     url: '/pages/my/my?access_token='+res.data.access_token
+						 });
+					}
+				})
+				
 			}
 		},
 		computed:{

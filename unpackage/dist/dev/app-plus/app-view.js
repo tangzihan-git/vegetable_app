@@ -2287,7 +2287,12 @@ var render = function() {
         [
           _c("v-uni-image", {
             staticStyle: { height: "320rpx", width: "100%" },
-            attrs: { src: _vm._$g(3, "a-src"), mode: "", _i: 3 }
+            attrs: {
+              src:
+                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3468000183,662932090&fm=26&gp=0.jpg",
+              mode: "",
+              _i: 3
+            }
           }),
           _c(
             "v-uni-view",
@@ -2477,18 +2482,9 @@ var render = function() {
           }
         }
       }),
+      _c("divider", { attrs: { _i: 31 } }),
       _c("uni-list-item", {
-        attrs: { _i: 31 },
-        on: {
-          click: function($event) {
-            return _vm.$handleViewEvent($event)
-          }
-        }
-      }),
-      _c("divider", { attrs: { _i: 32 } }),
-      _vm._v(_vm._$g(0, "t11-0")),
-      _c("uni-list-item", {
-        attrs: { _i: 33 },
+        attrs: { _i: 32 },
         on: {
           click: function($event) {
             return _vm.$handleViewEvent($event)
@@ -5545,11 +5541,7 @@ var render = function() {
                   [
                     _c("v-uni-input", {
                       staticClass: _vm._$g(7, "sc"),
-                      attrs: {
-                        type: "text",
-                        placeholder: "用户名,手机号邮箱",
-                        _i: 7
-                      },
+                      attrs: { type: "text", placeholder: "手机号", _i: 7 },
                       model: {
                         value: _vm._$g(7, "v-model"),
                         callback: function($$v) {
@@ -6225,7 +6217,7 @@ var render = function() {
                         callback: function($$v) {
                           _vm.$handleVModelEvent(8, $$v)
                         },
-                        expression: "phone"
+                        expression: "mobile"
                       }
                     })
                   ],
