@@ -2335,7 +2335,12 @@ var render = function() {
                     color: "#cc4a00",
                     "border-radius": "40rpx"
                   },
-                  attrs: { _i: 8 }
+                  attrs: { _i: 8 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
                 },
                 [
                   _c(

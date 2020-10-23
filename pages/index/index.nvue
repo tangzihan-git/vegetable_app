@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		<!-- 广告位 -->
-		<image  src="../../static/del/1.jpg" class="mt-4 mb-1 ml-1 mr-1" style="width:100% ;height: 220px;border-radius: 140px;"  mode=""></image>
+		<image  src="../../static/images/03.jpg" class="mt-4 mb-1 ml-1 mr-1" style="width:100% ;height: 220px;border-radius: 130px;"  mode=""></image>
 		<!-- 精选推荐 -->
 		<div>
 		<!-- 头部 -->
@@ -46,14 +46,21 @@
 		  <div class="flex-column j-center">
 			  <!-- 广告 -->
 			<div class="px-2">
-				<image src="../../static/bg.jpg" mode="" class="" style="width:100% ;height: 230px;border-radius: 10px;"></image>
+				 <slider class="" style="height: 230px;" interval="3000" auto-play="true">
+				  <div class="frame" v-for="img in AdImage">
+					<image class="freme-image" resize="cover" :src="img.src"></image>
+				  </div>
+				  <!-- dot -->
+				 <indicator class="indicator"></indicator>
+				</slider>
+					
 			</div>
 			<!-- 商品列表  分类 px-2-->
 			<div class="mt-2  px-2  py-2 flex-row j-sb ">
 				<!-- 菜单 -->
 				<a href="#" v-for="item,index in shopCate" :key="item.id" @click="toggleMenu(index,item.categoryId)">
 					<text class="font-weight font-md" :class="{'main-text-color':index==MenuIndex}">{{item.title}}</text>
-					<text class="shop-little text-center text-secondary px-1" :class="{'main-bg-color':index==MenuIndex,'text-white':index==MenuIndex}">{{item.text}}</text>
+					<text class=" shop-little font-sm text-center text-secondary px-1 " :class="{'main-bg-color':index==MenuIndex,'text-white':index==MenuIndex}">{{item.text}}</text>
 				</a>
 				
 			</div>
@@ -67,7 +74,7 @@
 			    				<div class="mt-1">
 			    					<!-- MSG -->
 			    					<text class="font-md text-dark">{{goods.goods_name}}</text>
-			    					<text class="mt-1 text-secondary">{{goods.goods_brief}}</text>
+			    					<text class="mt-1 font-sm text-secondary">{{goods.goods_brief}}</text>
 			    					<!-- 标签 -->
 			    					<!-- 标签 -->
 			    					<div class="flex-row flex-wrap mt-1">
@@ -156,6 +163,18 @@
 					src: "/static/images/gg3.jpg",
 				}
 			],
+			//广告轮播
+			AdImage:[
+				{
+					src:"/static/images/01.jpg"
+				},
+				{
+					src:"/static/images/02.jpg"
+				},
+				{
+					src:"/static/images/03.jpg"
+				}
+			],
 			menu:[
 				{id:1,img:'/static/images/sc3.png',text:'蔬菜豆制品'},
 				{id:2,img:'/static/images/sg.png',text:'新鲜水果'},
@@ -173,17 +192,6 @@
 					'categoryId':2,
 					goodsList:[
 						
-						{
-								"id": 3,
-								"goods_name": "猜你喜欢3",
-								"goods_number": 102,
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"goods_brief": "从产品设计、界面设计到功能开发的代码编写，全部由小T技术团队完成",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						}
 						
 					]
 	
@@ -193,18 +201,7 @@
 					'text':'应季新货',
 					'categoryId':8,
 					goodsList:[
-						{
-								"id": 1,
-								"goods_name": "时令新品1",
-								"goods_number": 102,
-								"keywords": "从产品设计、界面设计到功能开发的代码编写，全部由小T技术团队完成",
-								"goods_brief": "从产品设计、界面设计到功能开发的代码编写，全部由小T技术团队完成",
-								"counter_price": "8000.00",
-								"unit_price": "2000.00",
-								"is_new": 1,
-								"goods_unit": "",
-								"primary_pic_url": "https://xiaot-static.oss-cn-hangzhou.aliyuncs.com/images/cca06d0bb04b32409e6ac2fa56f9d274.png",
-						}
+						
 						
 					]
 				},
@@ -286,30 +283,14 @@
 				    if(!this.goodsReco.length){
 						console.log('请求推荐商品')
 						this.goodsReco  = data.data.data
+						this.shopCate[0]['goodsList'] = data.data.data
+						this.initSliderHeight()	
 					}
 				})
 				
 				
 			},
-			//动画
-			beforeEnter(el){
-				// console.log('hello word')
-				
-				el.style.transform="translate(0,0)"
-				el.style.transform="translate(40px,40px)"
-				el.style.transition="transform 7s"
-				
-			},
-			enter(el,done){
-				el.offsetWidth;
-				el.style.transform="translate(40px,40px)"
-				el.style.transition="all .5s"
-				console.log('动画进入')
-				done()
-			},
-			afterEnter(){
-				// this.flag=false
-			},
+			
 			//添加到购物车
 			addCar(item){
 				this.doAddCar(item)
@@ -319,6 +300,7 @@
 				})
 			},
 			initSliderHeight(){
+				console.log('执行初始化高度哈哈哈')
 				const query = uni.createSelectorQuery().in(this);
 				query.select(`#sliderBar${this.MenuIndex}`).boundingClientRect(data => {
 				  // console.log("得到布局位置信息" +data.height);
@@ -406,6 +388,22 @@
 		padding-top: 3px;
 		padding-bottom: 3px;
 		margin-top: 5px;
+		
 	}
+	.freme-image{
+		/* width:100% ; */
+		height: 230px;
+		border-radius: 10px;
+	}
+	.indicator {
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    height: 60px;
+	    background-color: rgba(0, 0, 0, 0);
+	    item-color: #ffffff;
+	    item-selected-color:  #45C36F;
+	  }
 </style>
-<!-- 下下下 上上下下上下 -->
+<!-- 晴天 下下下 上上下下上下 -->

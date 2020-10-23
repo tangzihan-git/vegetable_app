@@ -17,7 +17,7 @@
 						{{name?name:'登录/注册'}}
 					</view>
 				</navigator>
-				<view class="d-flex a-center j-center a-self-end ml-auto mr-5 px-4" 
+				<view @click="goShopping()" class="d-flex a-center j-center a-self-end ml-auto mr-5 px-4" 
 				style="height: 60rpx;background-color: #ffd43f;color:#cc4a00;border-radius: 40rpx;">
 					<view class="line-h  mr-1">
 						去购物
@@ -169,6 +169,11 @@
 				uni.navigateTo({
 					url: '../index/index.vue'
 				});
+			},
+			goShopping(){
+				uni.switchTab({
+					url:'/pages/index/index'
+				})
 			}
 			
 		},
