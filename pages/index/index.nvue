@@ -119,13 +119,29 @@
 				url: '/pages/search/search'
 			});
 		},
+		
 		beforeMount() {
 			
 		},
 		mounted(){
-			this.initSliderHeight()	
+			// this.initSliderHeight()	
+			// var webView = this.$mp.page.$getAppWebview();
+			// webView.setTitleNViewButtonStyle(0, {  //h5端会报错
+			// 	text: "完成"
+			// }); 
 		},
 		created(){
+			//获取位置信息
+			// #ifdef APP-PLUS  
+			plus.geolocation.getCurrentPosition( function(position){
+			   console.log( position.address.city);
+			}, function ( e ) {
+			   console.log( e.message );
+			},{geocode:true});
+			//设置位置信息
+			
+			
+			// #endif
 			//更新购物车
 			this.doUpdateCar()
 			//获取推荐商品

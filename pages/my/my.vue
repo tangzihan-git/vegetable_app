@@ -1,5 +1,5 @@
 <template>
-	<view class="animated fadeIn faster"> 
+	<view>
 	<!-- 页面初始化白屏 -->
 		<loading-plus v-if="beforReady" ></loading-plus>
 		<!-- 头部 -->
@@ -10,18 +10,15 @@
 			<image src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3468000183,662932090&fm=26&gp=0.jpg" style="height: 320rpx;width: 100%;" mode=""></image>
 			<!-- 用户相关 -->
 			<view class="d-flex a-center position-absolute left-0 right-0" style="bottom:50rpx">
-				<image :src="avatar?avatar:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3512222076,2472343844&fm=26&gp=0.jpg'" style="width:145rpx;height: 145rpx;border:5rpx solid" 
-				class="ml-4 rounded-circle border-light" mode=""></image>
+				<image :src="avatar?avatar:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3512222076,2472343844&fm=26&gp=0.jpg'" 
+				class="avatar ml-4 rounded-circle border-light" mode=""></image>
 				<navigator url="../login/login">
 					<view v-if="!avatar" class="ml-2 text-white font-lg">
 						{{name?name:'登录/注册'}}
 					</view>
 				</navigator>
-				<view @click="goShopping()" class="d-flex a-center j-center a-self-end ml-auto mr-5 px-4" 
-				style="height: 60rpx;background-color: #ffd43f;color:#cc4a00;border-radius: 40rpx;">
-					<view class="line-h  mr-1">
-						去购物
-					</view>
+				<view @click="goShopping()" class="goshopping d-flex a-center j-center a-self-end ml-auto mr-5 px-4" >
+					<text class="line-h  mr-1">去购物</text>
 				</view>
 			</view>
 		</view>
@@ -51,12 +48,6 @@
 				</view>
 			</view>
 		</card>
-		<!-- 广告图 -->
-		<!-- 广告图
-		<view class="animated fadeIn faster d-flex a-center j-center">
-			<image src="../../static/bg.jpg" style="width: 100%;"
-			style="height: 300upx;"></image>
-		</view> -->
 		<divider></divider>
 		<uni-list-item title="收货地址" :showExtraIcon="true" @click="navigate('user-path-list')" ></uni-list-item>
 		<uni-list-item title="帮助中心" :showExtraIcon="true"  otherIconStyle="color:red"></uni-list-item>
@@ -64,7 +55,6 @@
 		<uni-list-item title="联系客服" :showExtraIcon="true"   otherIconStyle="color:red"></uni-list-item>
 		<uni-list-item title="关于我们" :showExtraIcon="true" @click="navigate('about')" ></uni-list-item>
 		<divider></divider>
-		
 		<uni-list-item @click="navigate('user-set')" title="更多设置" :showExtraIcon="true"  otherIconStyle="color:red"></uni-list-item>
 	</view>
 </template>
@@ -185,17 +175,28 @@
 
 <style>
 @font-face {
-	  font-family: 'iconfont';  /* project id 1968838 */
-	  src: url('//at.alicdn.com/t/font_1968838_44p1sibni2n.eot');
-	  src: url('//at.alicdn.com/t/font_1968838_44p1sibni2n.eot?#iefix') format('embedded-opentype'),
+  font-family: 'iconfont'; 
+  src: url('//at.alicdn.com/t/font_1968838_44p1sibni2n.eot');
+  src: url('//at.alicdn.com/t/font_1968838_44p1sibni2n.eot?#iefix') format('embedded-opentype'),
 
-	  url('//at.alicdn.com/t/font_1968838_44p1sibni2n.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1968838_44p1sibni2n.ttf') format('truetype'),
 
-	}
-	.iconfont {
-	  font-family: "iconfont" !important;
-	  font-size: 16px;
-	  font-style: normal;
-	
-	}
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+
+}
+.goshopping{
+	height: 60rpx;
+	background-color: #ffd43f;
+	color:#cc4a00;
+	border-radius: 40rpx;
+}
+.avatar{
+	width:145rpx;
+	height: 145rpx;
+	border:5rpx solid
+}
 </style>

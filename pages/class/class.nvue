@@ -6,11 +6,9 @@
 				<div class="mx-1 row" v-for="category,i in categoryList" :key="category.id" :id="'topClass'+category.id" :ref="'topClass'+category.id">
 					<div class="flex-column a-center j-center" @click="changeClass(category.id)">
 						<div class="d-flex a-center" :class="category.id==classIndex?'cateActive':''">
-							<image :src="category.icon_url" style="width:75px;height:75px;border-radius: 32px;"></image>
+							<image :src="category.icon_url" class="cate-level-1-image"></image>
 						</div>
-						<text class="font-sm text-dark mt-1 px-1 " style="height:35px;border-radius: 40px;line-height: 35px;"
-						:class="category.id == classIndex?'main-bg-color text-white':'text-dark'" 
-						>{{category.name}}</text>
+						<text class="cate-level-1-text font-sm text-dark mt-1 px-1 " :class="category.id == classIndex?'main-bg-color text-white':'text-dark'" >{{category.name}}</text>
 					</div>
 				</div>
 			</scroller>
@@ -19,7 +17,6 @@
 		<scroller class="nav-left" id="tab" :show-scrollbar="false" scroll-direction="vertical">
 			<text style="font-size: 25px;width: 160px;" class="text-center px-2 nav-left-item  border-color text-dark"
 			:class="0===tabIndex?'active':''" @click="changeTab(0,classIndex,$event)"  :ref="'text0'" :id="'text0'">全部</text>
-			
 			<text style="font-size: 25px;width: 160px;" class="text-center px-2 nav-left-item  border-color text-dark" 
 			v-for="sub,i in currentSub" :key="sub.id"  :class="i+1===tabIndex?'active':''" @click="changeTab(i+1,sub.id,$event)"  :ref="'text'+i+1" :id="'text'+i+1">{{sub.name}}</text>
 		</scroller>
@@ -51,11 +48,8 @@
 					<text class="text-muted font my-1 show-line-1">{{item.goods_brief}}</text>
 					<!-- 标签 -->
 					<div class="row ">
-					
-						<text class="font px-1 ml-1"
-						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">损坏即赔</text>
-						<text class="font ml-1 px-1"
-						style="background-color: #FFF1F0;color:#FA6465;border-radius: 10px;min-width: 90px;height: 40px;line-height: 40px;text-align: center;">包邮</text>
+						<text class="tags font px-1 ml-1">损坏即赔</text>
+						<text class="tags font ml-1 px-1">包邮</text>
 					</div>			
 					<div class="row j-sb px-1 py-1 " style="position: relative;" > 
 						<price priceStyle="font-size:35px">{{item.retail_price}}</price>
@@ -64,7 +58,7 @@
 						style="width:50px;height:50px;border-radius: 25px;font-size: 35px;" @click="addCar(item)">
 							<text class="myfont text-white">&#xe61a;</text>
 						</div>
-						<text    v-for="car in car_list" v-if="car.id==item.id" class='car-badge text-white a-center j-center'>{{car.num}}</text>
+						<text  v-for="car in car_list" v-if="car.id==item.id" class='car-badge text-white a-center j-center'>{{car.num}}</text>
 					</div>
 				</div>
 			</div>
@@ -102,10 +96,8 @@
 		   this._initHandle()
 		},
 		created(){
-			
 			$.get('catalog-index').then(data=>{
 				this.categoryList = data.data.data.categoryList
-				// console.log(this.categoryList)
 				//保存二级菜单
 				this.categoryList.forEach(category=>{
 					if(category.subCategoryList.length){
@@ -129,21 +121,21 @@
 				 this.showTab()
 				 //初始化商品
 				 this.selectGoods()
-				 
 			})
 		},
 		onShow(){
+			//页面显示时 设置分类栏目
+			
 			this.classIndex = uni.getStorageSync('classId') ? uni.getStorageSync('classId') : 1
 			this.classId = uni.getStorageSync('classId') ? uni.getStorageSync('classId') : 1
 			this.changeClass(this.classId)
-			
-			
-			//获取首页传递的类别id
-			// var classId =  uni.getStorageSync('classId');
-			// console.log(classId)
 		},
 		onHide() {
-			uni.removeStorageSync('classId');
+			//离开页面时保存用户选择的分类
+			uni.setStorage({
+				key:'classId',
+				data:this.classId
+			})
 		},
 		methods:{
 			...mapActions(['doAddCar','doUpdateCar']),
@@ -166,22 +158,17 @@
 				}).exec();
 				query.select('#topClass5').boundingClientRect(data => {
 				  // console.log(data);
-				
-				}).exec();
-				
-				
+				}).exec();	
 			},
 			//顶部一级分类切换
 			changeClass(id){
 				//一级分类下的二级类
 			    this.showTab(id)
-				
 				this.classIndex = id
 				this.classId = id
 				this.tabIndex=0/*  */
 				//类别下的商品
 				this.selectGoods()
-				
 				const query = uni.createSelectorQuery().in(this);
 				query.select('#topClass'+id).boundingClientRect(data => {
 				  // console.log(data.bottom);
@@ -393,5 +380,23 @@
 	background-color: #FF5D60;
 	text-align: center;
 }
-	
+.cate-level-1-image{
+	width:75px;
+	height:75px;
+	border-radius: 32px;
+}
+.cate-level-1-text{
+	height:35px;
+	border-radius: 40px;
+	line-height: 35px;
+}
+.tags{
+	background-color: #FFF1F0;
+	color:#FA6465;
+	border-radius: 10px;
+	min-width: 90px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}	
 </style>

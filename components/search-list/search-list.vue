@@ -19,21 +19,16 @@
 					包邮
 				</text>
 			</view>
-			
-			
 			<view class="d-flex">
 				<price>{{item.retail_price}}</price>
 				<view @click.stop="addCar" class=" ml-auto text-center position-relative text-white main-bg-color iconfont icon-gouwuche font-weight-100 d-flex a-center j-center" style="width:50rpx;height:50rpx;border-radius: 50%;font-size: 35rpx;">
 					<view v-for="car in car_list" v-if="car.id==item.id" class='car-badge d-flex a-center j-center'>{{car.num}}</view>
 				</view>
 			</view>
-			
 				<!-- <view class="font-sm text-light-muted">
 					{{item.paynum}}人付款
 				</view> -->
-			
 			<!-- 购物车 -->
-			
 		</view>
 	</view>
 </template>
@@ -82,10 +77,7 @@
 			...mapGetters(['countCar']),
 			borderRadius(){
 				return `border-radius:${this.borderRadiusNum}rpx`
-			}
-		
-				
-			
+			}	
 		}
 	}
 </script>

@@ -1,11 +1,9 @@
 <template>
 	<view>
 		<view>
-			<view class="iconfont icon-guanbi d-flex a-center j-center font-lg"  style="width:100rpx;height:120rpx;"
-			@click="back">
+			<view class="iconfont icon-guanbi d-flex a-center j-center font-lg"  style="width:100rpx;height:120rpx;" @click="back"></view>
 		</view>
-		</view>
-		<view class="text-center font-lg" style="font-size:55rpx; padding-top: 130rpx;padding-bottom:70rpx ;">{{status?'账号密码登录':'验证码登录'}}</view>
+		<view class="title text-center font-lg" style="">{{status?'账号密码登录':'验证码登录'}}</view>
 		<view class="px-2">
 			<template v-if="status">
 				<!-- 账号密码登录 -->
@@ -55,7 +53,6 @@
 </template>
 
 <script>
-	// import uniStatusBar from '@/components/uni-ui/uni-nav-bar/uni-nav-bar.vue'
 	import mainBtn from '@/components/common/main-btn.vue'
 	import otherLogin from '@/components/common/other-login.vue'
 	
@@ -184,5 +181,9 @@
 </script>
 
 <style>
-
+.title{
+	font-size:55rpx; 
+	padding-top: 130rpx;
+	padding-bottom:70rpx ;
+}
 </style>

@@ -1,22 +1,14 @@
 {
 	
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [ 
 	 
 		{
 			"path": "pages/index/index",
 			"style": {
-				// "app-plus":{
-				// 	"titleNView":false,
-				// 	"scrollIndicator":"none",
-				// 	"bounce":"none"
-				// }
 				"app-plus":{
 					"bounce":"none",
-					
-					
 					// "titleNView":false 
 					"scrollIndicator":"none",
-					
 					"titleNView":{
 						"backgroundColor":"#45c36f",
 						// "type":"transparent",
@@ -26,6 +18,7 @@
 							"borderRadius":"4px",
 							"disabled":true,
 							"placeholder":"搜一搜",
+							
 							"placeholderColor":"#cccccc",
 							"borderRadius":"40px"
 						},
@@ -34,8 +27,9 @@
 								"color":"#ffffff",
 								"colorPressed":"#ffffff",
 								"float":"left",
-								"fontSize":"22px",
+								"fontSize":"20px",
 								"fontSrc":"/static/iconfont.ttf",
+								
 								"text":"\ue60e"
 							},
 							{
@@ -125,10 +119,6 @@
 					"bounce":"none"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/test/test",
-            "style" : {}
         }
         ,{
             "path" : "pages/class/class",

@@ -1,0 +1,42 @@
+<template>
+	<view class="">
+		<text v-for="item,index in textes" :key="index" class="tag font px-1 ml-1" :stlye="custom">{{item.name}}</text>
+	</view>
+	
+</template>
+
+<script>
+	export default {
+		data(){
+			return {
+				
+			}
+		},
+		props:{
+			custom:{
+				type: String,
+				default: ''
+			}, 
+			textes:{
+				type: Array,
+				default: [
+					{'name':'损坏即赔'},
+					{'name':'包邮'}
+				]
+			}, 
+		}
+	}
+</script>
+<style src="@/common/tzh-layout-nvue.css"></style>
+<style src="@/common/common.css"></style>
+<style>
+	.tag{
+		background-color: #FFF1F0;
+		color:#FA6465;
+		border-radius: 10px;
+		min-width: 90px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+	}
+</style>

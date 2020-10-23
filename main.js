@@ -6,9 +6,6 @@ import noThing from '@/components/common/no-thing.vue';
 import loading from "@/components/common/loading.vue";
 import loadingPlus from "@/common/mixin/loading-plus.vue"
 
-
-
-
 Vue.component('divider',divider)
 Vue.component('no-thing',noThing)
 Vue.component('loading',loading)

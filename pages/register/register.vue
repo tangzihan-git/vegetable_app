@@ -1,15 +1,12 @@
 <template>
 	<view>
 		<view>
-			<view class="iconfont icon-guanbi d-flex a-center j-center font-lg"  style="width:100rpx;height:120rpx;"
-			@click="back">
-		</view>
+			<view class="iconfont icon-guanbi d-flex a-center j-center font-lg"  style="width:100rpx;height:120rpx;"@click="back"></view>
 		</view>
 		<view class="text-center font-lg" style="font-size:55rpx; padding-top: 130rpx;padding-bottom:70rpx ;">用户注册</view>
 		<view class="px-2">
 			<template v-if="status">
 				<!-- 账号密码登录 -->
-				
 				<view class="mb-2 d-flex a-stretch">
 					<view class="border-bottom d-flex a-center j-center font px-2">+86</view>
 					<input type="text" v-model="mobile" placeholder="手机号" class="border-bottom uni-input p-2 flex-1" />
@@ -70,9 +67,6 @@
 				verification_key:''
 				
 			}
-		},
-		onLoad(){
-			// this.getImgCode()
 		},
 		methods: {
 			back(){

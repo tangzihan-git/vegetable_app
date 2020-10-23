@@ -3,12 +3,12 @@
 		<divider></divider>
 		<uni-list-item title="头像">
 			<block slot="right">
-				<image src="../../static/bg.jpg" style="height: 90rpx;width: 90rpx;" class="rounded-circle border border-light" mode=""></image>
+				<image src="/static/images/02.jpg" style="height: 90rpx;width: 90rpx;" class="rounded-circle border border-light" mode=""></image>
 			</block>
 		</uni-list-item>
 		<uni-list-item title="姓名">
 			<block slot="right">
-				summer
+				tzh
 			</block>
 		</uni-list-item>
 		

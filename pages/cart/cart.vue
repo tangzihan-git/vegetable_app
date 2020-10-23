@@ -2,19 +2,14 @@
 	<view style="background-color: #f5f5f5;" class="animated fadeIn faster">
 		<!-- 页面初始化白屏 -->
 		<loading-plus v-if="beforReady" ></loading-plus>
-		
 		<uni-nav-bar fixed :right-text="isedit?'完成':'编辑'" title="购物车" statusBar :shadow="false" @click-right="isedit=!isedit"></uni-nav-bar>
 		<!-- 购物车空 -->
 		<view class="py-5  d-flex a-center j-center bg-white" v-if="disabledAll">
 			<view class="iconfont icon-gouwuche text-light-muted" style="font-size:50upx"></view>
 			<text class="text-light-muted mx-2">购物车还是空的</text>
-			
-				<view @click="goHome()" class="px-2 py-1 border border-light-secondary rounded" hover-class="bg-light-secondary">
-					去逛逛
-					
-				</view>
-			
-			
+			<text @click="goHome()" class="px-2 py-1 border border-light-secondary rounded" hover-class="bg-light-secondary">
+				去逛逛
+			</text>		
 		</view>
 		<!-- 购物车列表 -->
 		<view class="bg-white px-2">
@@ -44,7 +39,6 @@
 				</view>
 			</view>
 		</view>
-		
 		<!-- 占位 -->
 		<!-- <view style="height: 100upx;"></view> -->
 		<!-- 合计 -->
@@ -81,7 +75,6 @@
 				</view>
 			</view>
 		</template>
-		
 	</view>
 </template>
 
@@ -105,11 +98,6 @@
 
 			}
 		},
-		onReady() {
-			
-		
-			
-		},
 		methods: {
 			...mapActions(['doSelect', 'doDelGoods']),
 			...mapMutations(['selectIndex']),
@@ -119,7 +107,6 @@
 			},
 			changeNum(e, item, index) {
 				item.num = e
-				// console.log(e)
 				//请求后台更新购物车数量
 				this.$.post('cart-update',{
 					id:item.id,
@@ -127,7 +114,7 @@
 				}).then(data=>{
 					// console.log(data)
 				})
-				
+				//更新角标
 				uni.setTabBarBadge({
 					index:2,
 					text:`${this.countCar}`

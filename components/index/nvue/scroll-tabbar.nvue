@@ -8,9 +8,6 @@
 				<text style="height: 75px;line-height: 75px;border-bottom-width: 5px;border-style: solid;" 
 				:style="{'color':tabIndex===index?'#45C36F':'','border-color':tabIndex===index?'#45C36F':'#fff'}"
 				>{{item.name}}
-				
-				
-				
 				</text>
 			</div>
 		</scroller>
