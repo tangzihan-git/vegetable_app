@@ -216,7 +216,7 @@
             				"align":"left",
             				"backgroundColor":"#f7f7f7",
             				"borderRadius":"4px",
-            				"disabled":false,
+            				"disabled":true,
             				"placeholder":"新鲜包菜",
             				"placeholderColor":"#cccccc"
             			},

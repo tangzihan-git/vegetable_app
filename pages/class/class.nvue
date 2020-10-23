@@ -27,9 +27,9 @@
 		<div class="nav-right" ref="box">
 			<div class="filter border-bottom  a-center" style="flex-direction: row-reverse;">
 				<div class="row flex-nowrap">
-					<text class="mx-1 font " @click="orderShop('common')" :class="sortType=='common' ? 'font-weight main-text-color' : ''">综合</text>
+					<text class="mx-1 font " @click="orderShop('id')" :class="sortType=='common' ? 'font-weight main-text-color' : ''">综合</text>
 					<text class="mx-1 font " @click="orderShop('sell_volume')" :class="sortType=='sell_volume' ? 'font-weight main-text-color' : ''">销量</text>
-					<div class="row" @click="orderShop('retail_price')">
+					<div class="row" @click="orderShop('retail_price','click')">
 						<text class="ml-1 font " :class="sortType=='retail_price' ? 'font-weight main-text-color' : ''">价格</text>
 						<div class="">
 							<text class="myfont"  style="font-size: 20px;" :class="priceStatus==true && sortType=='retail_price'?'main-text-color':'text-muted'">&#xeb59;</text>
@@ -129,12 +129,15 @@
 				 this.showTab()
 				 //初始化商品
 				 this.selectGoods()
+				 
 			})
 		},
 		onShow(){
 			this.classIndex = uni.getStorageSync('classId') ? uni.getStorageSync('classId') : 1
 			this.classId = uni.getStorageSync('classId') ? uni.getStorageSync('classId') : 1
 			this.changeClass(this.classId)
+			
+			
 			//获取首页传递的类别id
 			// var classId =  uni.getStorageSync('classId');
 			// console.log(classId)
@@ -178,6 +181,7 @@
 				this.tabIndex=0/*  */
 				//类别下的商品
 				this.selectGoods()
+				
 				const query = uni.createSelectorQuery().in(this);
 				query.select('#topClass'+id).boundingClientRect(data => {
 				  // console.log(data.bottom);
@@ -188,6 +192,7 @@
 				  }
 				  
 				}).exec();
+				
 			},
 			//显示二级分类
 			showTab(id=this.classIndex){
@@ -226,18 +231,22 @@
 					categoryId:this.classId
 				}).then(data=>{
 					this.goods = data.data.data
+					//拿到数据对其进行排序防止闪一下
+					this.orderShop(this.sortType)
 					// console.log(this.goods)
 				})
+				
 				// console.log(goods)
 			},
 			//升序降序
-			orderShop(type){
+			orderShop(type,handle=null){
+				
 				this.sortType = type
-				if(type=='retail_price'){
-					this.priceStatus=!this.priceStatus
+				if(this.sortType=='retail_price'){
+					if(handle=='click')this.priceStatus=!this.priceStatus //用户点击时价格排序取反
 					var sort = this.priceStatus
 				}
-				if(type=='common')type='id';//综合排序暂时以id排序	
+				//综合排序暂时以id排序	
 				//数组对象排序
 				var compare = function (prop) {
 				    return function (obj1, obj2) {
@@ -252,7 +261,7 @@
 				        }            
 				    } 
 				}
-				this.goods.sort(compare(type))
+				this.goods.sort(compare(this.sortType))
 				
 			},
 			

@@ -13,7 +13,9 @@
 				<image :src="avatar?avatar:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3512222076,2472343844&fm=26&gp=0.jpg'" style="width:145rpx;height: 145rpx;border:5rpx solid" 
 				class="ml-4 rounded-circle border-light" mode=""></image>
 				<navigator url="../login/login">
-					<view v-if="!avatar" class="ml-2 text-white font-lg">登录/注册</view>
+					<view v-if="!avatar" class="ml-2 text-white font-lg">
+						{{name?name:'登录/注册'}}
+					</view>
 				</navigator>
 				<view class="d-flex a-center j-center a-self-end ml-auto mr-5 px-4" 
 				style="height: 60rpx;background-color: #ffd43f;color:#cc4a00;border-radius: 40rpx;">

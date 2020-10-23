@@ -2319,7 +2319,7 @@ var render = function() {
                     ? _c(
                         "v-uni-view",
                         { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-                        [_vm._v("登录/注册")]
+                        [_vm._v(_vm._$g(7, "t0-0"))]
                       )
                     : _vm._e()
                 ],

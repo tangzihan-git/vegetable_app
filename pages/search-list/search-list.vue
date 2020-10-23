@@ -2,7 +2,7 @@
 	<view>
 		<!-- 排序|筛选 -->
 		<view class="d-flex border-top border-bottom a -center" style="height:100upx">
-			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('common')">
+			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('id')">
 				<text :class="sortType==='common'?'main-text-color font-weight':'text-muted'">综合</text>
 				
 			</view>
@@ -10,7 +10,7 @@
 				<text :class="sortType==='sell_volume'?'main-text-color font-weight':'text-muted'">销量</text>
 				
 			</view>
-			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('retail_price')">
+			<view class="flex-1 d-flex a-center j-center font-md"  @click="orderShop('retail_price','click')">
 				<text :class="sortType==='retail_price'?'main-text-color font-weight':'text-muted'">价格</text>
 				<view>
 				<!-- 排序按钮 -->	
@@ -82,6 +82,11 @@
 				
 			}
 		},
+		onNavigationBarSearchInputClicked(){
+			uni.navigateTo({
+				url: '/pages/search/search'
+			});
+		},
 		onLoad(e) {
 			this.word = e.word
 			this.searchGoods()
@@ -120,13 +125,13 @@
 			 })
 		 },
 		 //升序降序
-		 orderShop(type){
+		 orderShop(type,handle=null){
 		 	this.sortType = type
-		 	if(type=='retail_price'){
-		 		this.priceStatus=!this.priceStatus
+		 	if(this.sortType=='retail_price'){
+		 		if(handle=='click')this.priceStatus=!this.priceStatus
 		 		var sort = this.priceStatus
 		 	}
-		 	if(type=='common')type='id';//综合排序暂时以id排序	
+		 	//综合排序暂时以id排序	
 		 	//数组对象排序
 		 	var compare = function (prop) {
 		 	    return function (obj1, obj2) {
@@ -141,7 +146,7 @@
 		 	        }            
 		 	    } 
 		 	}
-		 	this.goods.sort(compare(type))
+		 	this.goods.sort(compare(this.sortType))
 		 	
 		 },
 		 //添加到购物车
