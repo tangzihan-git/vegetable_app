@@ -2,9 +2,9 @@
 	<view>
 		<view style="height: 100rpx;"></view>
 		<view class="d-flex a-stretch bg-white position-fixed left-0 bottom-0 right-0" style="height:100rpx;z-index: 100;">
-			<view class="d-flex flex-1 flex-column a-center j-center line-h-md"
+			<view @click="sc" class="d-flex flex-1 flex-column a-center j-center line-h-md"
 			hover-class="bg-light-secondary">
-				<view class="iconfont icon-xihuan line-h-md text-muted font"
+				<view class="iconfont icon-collection-b line-h-md text-muted font"
 				hover-class="bg-light-secondary"></view>
 				<text>收藏</text>
 			</view>
@@ -49,6 +49,9 @@
 			},
 			addCar(){
 				this.$emit('addCar')
+			},
+			sc(){
+				this.$U.showToast('商品没必要收藏\r\n直接添加购物车就行了')
 			}
 		},
 		computed:{

@@ -1,7 +1,7 @@
 <template>
 	<view class="d-flex a-center j-center px-5 py-3">
 		<view  v-for="item,index in providerList" :key="index" class="flex-1 d-flex a-center j-center">
-			<view :class="item.icon + ' '+item.bgColor" class="iconfont font-lg text-white  d-flex a-center j-center rounded-circle" style="width:100rpx;height:100rpx"></view>
+			<view :class="item.icon + ' '+item.bgColor" class="iconfont  text-white  d-flex a-center j-center rounded-circle" style="width:100rpx;height:100rpx;font-size: 40rpx;"></view>
 		</view>
 	</view>
 </template>
@@ -24,7 +24,7 @@
 		                switch (value) {
 		                    case 'weixin':
 		                        providerName = '微信登录'
-								icon = 'icon-weixin'
+								icon = 'icon-weixin1'
 								bgColor = 'bg-success'
 		                        break;
 		                    case 'qq':
