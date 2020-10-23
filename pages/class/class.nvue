@@ -146,7 +146,7 @@
 			uni.removeStorageSync('classId');
 		},
 		methods:{
-			
+			...mapActions(['doAddCar','doUpdateCar']),
 			_initHandle(){
 				//获取侧板栏离页面底部的距离
 				const query = uni.createSelectorQuery().in(this);
@@ -276,7 +276,13 @@
 					url: '/pages/detail/detail'
 				});
 			},
-			
+			addCar(item){
+				this.doAddCar(item)
+				uni.setTabBarBadge({
+					index:2,
+					text:`${this.countCar}`
+				})
+			}
 			
 		},
 		computed: {

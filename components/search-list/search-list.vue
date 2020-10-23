@@ -66,7 +66,7 @@
 			},
 			//添加到购物车
 			addCar(){
-				console.log('h')
+				
 				this.doAddCar(this.item)
 				uni.setTabBarBadge({
 					index:2,
